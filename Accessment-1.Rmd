@@ -1,7 +1,7 @@
 ---
-title: "<img src='figure/nyu.png' width='240'>"
-subtitle: "[<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span>"
-author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='www/quantitative trader 1.jpg' width='13'> <img src='www/RYU.jpg' width='15'> <img src='www/ENG.jpg' width='24'> ®"
+title: "<img src='figure/coursera.jpg' width='37'> <img src='figure/nyu.png' width='240'>"
+subtitle: "<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span>"
+author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='figure/quantitative trader 1.jpg' width='12'> <img src='figure/ENG.jpg' width='24'> ®"
 date: "`r lubridate::today('Asia/Tokyo')`"
 output:
   html_document: 
@@ -20,7 +20,7 @@ output:
 <span style='color:green'>**Theme Song**</span>
 <br>
 
-<audio src="music/Mika - Elle me dit (happy song to be millionaire).mp3" controls></audio>
+<audio src="music/NY-BJ-Dream.mp3" controls></audio>
 <br>
 
 ------
@@ -198,4 +198,4 @@ sys
 
 <br>
 
-<span style='color:RoyalBlue'>**Powered by - Copyright® Intellectual Property Rights of <img src='www/scb-logo3rs.jpg' width='18'> [Sςιβrοκεrs Trαdιηg ®️](http://www.scibrokes.com) 経営企業**</span>
+<span style='color:RoyalBlue'>**Powered by - Copyright® Intellectual Property Rights of <img src='figure/scb-logo3rs.jpg' width='18'> [Sςιβrοκεrs Trαdιηg ®️](http://www.scibrokes.com) 経営企業**</span>
