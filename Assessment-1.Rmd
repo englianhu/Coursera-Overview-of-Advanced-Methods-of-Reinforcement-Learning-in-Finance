@@ -1,0 +1,284 @@
+---
+title: "<img src='figure/coursera.jpg' width='37'> <img src='figure/nyu.png' width='240'>"
+subtitle: "<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span> (Assessment 1)"
+author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='figure/quantitative trader 1.jpg' width='12'> <img src='figure/ENG.jpg' width='24'> ®"
+date: "`r lubridate::today('Asia/Tokyo')`"
+output:
+  html_document: 
+    mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+    code_folding: hide
+    css: CSSBackgrounds.css
+---
+
+<br>
+<span style='color:green'>**Theme Song**</span>
+<br>
+
+<audio src="music/NY-BJ-Dream.mp3" controls></audio>
+<br>
+
+------
+
+<br>
+
+# テスト 1 (Assessment 1)
+
+# Introduction
+
+合計点数 <span style='color:#3C5C; background-color:#011A27;'>60点</span>
+
+<br>
+
+## 1. 質問 1 (Problem 1: Ito calculus)
+
+This is a warm-up problem to refresh your stochastic calculus (if you already know it), or to have crash course on it, if you don't. While it is not possible here to explain in details why Ito calculus works the way it works, you will see how to use it for practical purposes.
+
+Let's assume the stock price satisfies the following stochastic differential equation (SDE):
+
+$$dS_t = \mu S_tdt + \sigma S_t d W_t \; \; \; (1)$$
+
+where $\mu$ and $\sigma$ stand for the drift and volatility (both can be functions of $S_t$), while Wt is a Brownian motion. If both $\mu$ and $\sigma$ are constant parameters, Eq.(1) describes the Geometric Brownian Motion (GBM) model.
+
+The key property of the Brownian motion is $\langle \left( dW_t \right)^2 \rangle = dt$. In words, the mean value of the squared displacement of the Brownian motion is equal to the time step $dt$. This is clearly very different from a regular smooth (differentiable) time-dependent variable $X_t$ for which we would have $(dX_t)^2 ∼ (dt)^2$. The reason we have $(dW_t)^2= dt$ is that a Brownian motion Wt  is nowhere differentiable, and the 'differential' $dW_t$ is not a conventional differential from calculus.
+
+Special rules are needed to define derivatives and integrals of functions of a Brownian motion.
+
+Now consider an arbitrary function $f(t, S_t)$. Let's use the second-order Taylor expansion to compute a change of this function for a small but finite time step $dt$: 
+
+$$df = \frac{\partial f}{\partial t} dt +  \frac{\partial f}{\partial S_t} dS_t +  \frac{1}{2} \frac{\partial^2 f}{\partial S_t^2} \left(dS_t \right)^2 \; \; \;  (2)$$
+
+where higher-order terms are neglected. Normally, the second-order derivative term is not needed either in the $\lim_{dt \to 0}$, as for functions of regular (non-stochastic) variables, its contribution is O $(dt)^2$ and hence can be neglected in the continuous-time $\lim_{dt \to 0}$. But if $S_t$) is a random variable driven by a Brownian noise as in Eq.(1), then
+
+$$\left(dS_t \right)^2 =  S_t^2 \sigma^2 \left( dW_t \right)^2  + O \left((dt)^2 \right) =   S_t^2 \sigma^2 dt = O(dt)$$
+
+and hence this term has to be retained. Eq.(2) for functions of random variables is called Ito's lemma. Now assume that you have a function
+
+$$y_t = f(S_t) = \log (S_t/ \bar{S})$$
+
+where $\bar{S}$  is some fixed price. Using Eq.(2), compute the SDE for $y_t$. You then will obtain one of the answers shown here. Select the correct one:
+
+Select the correct one:    
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $dy_t = - \left( \mu - \frac{\sigma^2}{2} \right) dt + \sigma d W_t$
+ 
+- $dy_t = \left(\mu - \frac{\sigma^2}{2} \right) dt + \sigma d W_t$
+
+- $dy_t = \left( \mu + \frac{\sigma^2}{2} \right) dt + \sigma d W_t$
+
+<br><br>
+
+## 2. 質問 2 (Problem 2)
+
+A straddle option can be thought of as a sum of a call and put option with the same strike and expiry. Recall that the delta ∆ of an option is an optimal quantity of the underlying stock that is needed to optimally hedge the option. In the Black-Scholes model, it is given by the derivative of the option price with respect to the stock price. For a call option without dividends, we have $\Delta = N(d_1)$ and for a put option without dividends, we have $\Delta = N(d_1) − 1$, where
+
+$$d_1 = \frac{\log \frac{S_t}{K} + \left( \mu + \frac{\sigma^2}{2} \right) \tau}{\sigma \sqrt{\tau}}$$
+
+where St  is the current stock price, $K$ is the option strike, $\mu$ is interest rate minus dividend rate, and $\tau = T − t$ is time to maturity, where $T$ is the expiry date.
+
+What is the correct answer for the delta of a long (buyer) position in a straddle option?
+
+Select all correct answers:$S_t$
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- ${\color{Green}\Delta = 2N(d_1) − 1}$
+- $\Delta = N(d_1) − 1 − N(d_1)$
+- $\Delta = N(d_1) + N(−d_1)$
+- $\Delta = N(d_1) − 1 + N(−d_1)$
+
+<br><br>
+
+## 3. 質問 3 (*Avellaneda-Lipkin model* of stock pinning)
+
+The *Avellaneda-Lipkin model (2003)* deals with the stock pinning phenomenon when a stock can be 'pinned' to a strike of an option on this stock close to the maturity of this stock. The main assumption of the model is that trading a quantity $Q$ of a stock has a linear impact on the stock return, in addition to a noise term (3): $\frac{d S_t}{S_t} = E Q dt + \sigma dW_t$
+
+Here $E$ is an elasticity parameter. Note that $Q > 0$ correspond to buying the stock, while $Q < 0$ means selling the stock.
+
+Assume that the trade $Q$ is driven by an option trader who buys $n$ straddle options with the same strike $K$ and expiration $T$ . The quantity of stock sold by the option trader in interval $dt$ as a hedge is therefore
+
+where $\Delta$ is delta of a single straddle option that you found in Problem 2: (4) $Q dt = - n \frac{ \partial \Delta}{\partial t} dt = n \frac{ \partial \Delta}{\partial \tau} dt$
+
+Problem 3: The SDE for log-price in the AL model
+
+Now use Ito's lemma (2) and Eqs.(3) and (4) to compute the SDE for variable  $y_t = \log \frac{S_t}{K}$. You should get one of the formulas given below (where $a = \mu + \sigma^2/2a)$.
+
+Select the correct answer:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- ${\color{Green}dy_t = - \frac{nE}{\sqrt{2\pi}} \frac{y_t  - a \tau}{\sigma \tau^{3/2}} e^{ - \frac{(y+ a \tau)^2}{2 \sigma^2 \tau}} dt + \sigma dW_t}$
+
+- $dy_t = - \frac{nE}{\sqrt{2\pi}} \frac{y_t  - a \tau}{\sigma \tau^{1/2}} e^{ - \frac{(y+ a \tau)^2}{2 \sigma^2 \tau}} dt + \sigma dW_t$
+
+- $dy_t = - \frac{nE}{\sqrt{2\pi}} \frac{y_t  - a \tau}{\sigma \tau^{1/2}} e^{ - \frac{ | y+ a \tau | }{2 \sigma^2 \tau}} dt + \sigma dW_t$
+
+- $dy_t = - \frac{nE}{\sqrt{2\pi}} \frac{y_t  + a \tau}{\sigma \tau^{3/2}} e^{ - \frac{(y- a \tau)^2}{2 \sigma^2 \tau}} dt + \sigma dW_t$
+
+<br><br>
+
+## 4. 質問 4 (Problem 4: Stock pinning in the AL model)
+
+By inspection of the formula that you
+derived in Problem 3, you can see that the drift of the resulting motion of $y_t$ may become singular at
+maturity of the option when $\tau = T − t \to 0$. What is the implication of this effect? 
+
+Select the correct answer:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- The model is not wrong, but is only applicable for long times to maturity $\tau > y_t/a$.    
+
+- The model is wrong, because infinities should not occur in a consistent model.
+
+- The apparent singularity of the drift is cancelled
+by the fact that for small values of $\tau$, $y_t ∼ \tau^{3/2} \to 0$.  As $y_t = log S_t/K$, this means that the stock price is 'pinned' at the option strike $K$ close to the option maturity when $\tau \to 0$.
+
+<br><br>
+
+## 5. 質問 5 (Optimal Control With a Pen and Paper)
+
+Let $S_t$ be a time-$t$ price of a risky asset such an a sector exchange-traded fund (ETF). We assume that our setting is discrete-time, and we denote different time steps by integer valued-indices $t = 0,\ldots, T$, so there are $T + 1$ values on our discrete time grid.
+
+The discrete-time random evolution of the risky asset $S_t$ is
+
+$$S_{t+1} = S_t \left( 1 + \phi_t \right) \; \; \;  (5)$$
+
+where $\phi_t$ is a random variable whose probability distribution may depend on the current asset value $S_t$. To ensure non-negativity of prices, we assume that φt is bounded from below $\phi_t ≥ −1$.
+
+Consider a wealth process Wt of an investor who starts with an initial wealth $W_0$ at time $t = 0$ and, at each period $t = 0,\ldots, T − 1$ allocates a fraction $u_t = u_t(S_t)$ of the total portfolio value to the risky asset, and the remaining fraction $1 − u_t$ is invested in a risk-free bank account that pays a risk-free interest rate $r_f$ (for simplicity, we set $r_f = 0$ in this example.) We will refer to a set of decision variables for all time steps as a policy 
+
+$$\pi \equiv \left\{ u_t \right\}_{t=0}^{T-1}$$
+ 
+
+The wealth process is self-financing, i.e. at each time step, any purchase of an additional quantity of the risky asset is funded from the bank account. Vice versa, any proceeds from a sale of some quantity of the asset go to the bank account.
+
+The wealth at time $t + 1$ is then given by the following relation:
+
+$$W_{t+1} = \left( 1 - u_t \right) W_{t} +  u_t W_t \left( 1 + \phi_t \right) \; \; \;  (6)$$
+
+This produces the one-step return (7): $r_t  = \frac{W_{t+1} - W_t}{W_t} = u_t \phi_t$
+
+Note this is a random function of the asset price $S_t$. We define one-step rewards $R_t$ for $t = 0,\ldots, T − 1$ as risk-adjusted returns
+
+$$R_t = r_t  - \lambda \text{Var} \left[  r_t \right]   =  u_t  \phi_t  -  \lambda u_t^2 \text{Var} \left[ \phi_t | S_t \right] \; \; \;  (8)$$
+
+where $\lambda$ is a risk-aversion parameter. We now consider the problem of maximization of the following functional of the control variable $u_t$, (9): 
+
+$$V^{\pi}(s) = \max_{u_t} \mathbb{E} \left[ \left. \sum_{t=0}^{T} R_t \right| S_t = s \right]= \max_{u_t} \mathbb{E} \left[ \left. \sum_{t=0}^{T} u_t \phi_t -  \lambda u_t^2 \text{Var} \left[ \phi_t | S_t \right]  \right| S_t = s \right]$$
+
+Here the upper index $\pi$ emphasizes that this is a functional of the policy $\pi$.
+
+Eq.(9) defines an optimal investment problem for $T − 1$ steps faced by an investor whose objective is to optimize risk-adjusted long-term returns. This is the stochastic optimal control problem that can be solved backward starting from the last time interval $[T − 1, T]$. For each $t = T − 1, T − 2,\ldots, 0$, the optimality condition for action ut is obtained by maximization of $V(s)$ with respect to $u_t$.
+
+This is an example of stochastic optimal control for an optimal portfolio that maximizes its cumulative risk-adjusted return by repeated re-balancing between cash and a risky asset. Such problems can be solved using means of dynamic programming (DP), or reinforcement learning. In our problem, the DP solution is given by a semi-analytical expression that you will find as  your next task.
+
+### Problem 5
+
+Derive the optimal action $u_t$ by setting the derivative of Eq.(9) with respect to the time-$t$ action $u_t$ to zero. 
+
+Note that your result is a non-parametric expression for the optimal action $u_t$ in terms of a ratio of two conditional expectations. To be useful in practice, they might need some further work or modifications. This is achieved by a method that you will do in the next exercise.    
+
+Select the correct answer.
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $u_t = \frac{1}{2 \lambda} \frac{ \text{Var} \left[ \phi_t | S_t \right]}{ \mathbb{E} \left[ \left. \phi_t  \right| S_t \right] }$
+
+- ${\color{Green}u_t = \frac{1}{2 \lambda} \frac{ \mathbb{E} \left[ \left. \phi_t  \right| S_t \right] }{ \text{Var} \left[ \phi_t | S_t \right] }}$
+
+- $u_t = \frac{1}{2 \lambda} \frac{ \mathbb{E} \left[ \left. \phi_t  \right| S_t \right] }{ \mathbb{E} \left[ \phi_t^2 | S_t \right] }$
+
+<br><br>
+
+## 6. 質問 6 (Problem 6)
+
+Instead of non-parametric specifications of an optimal action as computed in Problem 4, we can develop a parametric model of optimal action. To this end, assume we have a set of basic functions $\psi_k(S)$ with $k = 1,\ldots, K$. Here $K$ is the total number of basis function - the same as the dimension of your model space.
+
+We now define the optimal action $u_t = u_t(S_t)$ in terms of coefficients $\theta_k$ of expansion over  such state of basis functions $\Psi_k$ (for example, we could use spline basis functions, Fourier bases etc.) (10):  $u_t = u_t(S_t) = \sum_{k=1}^{K} \theta_{k}(t)  \Psi_{k}(S_t)$
+
+Compute the optimal coefficients $\theta_k(t)$ by substituting Eq.(10) into Eq.(9) and maximizing it with respect to a set of weights $\theta_k(t)$ for a $t-t_h$ time step.
+
+Your solution should be in vector form for the vector  $\vec{\theta} = (\theta_1, \ldots, \theta_K)$, and should be expressed in terms of a matrix $A$ and vector B whose elements are defined as follows (11): $A_{k k'} = \mathbb{E} \left[ \Psi_k(S) \Psi_{k'}(S) \text{Var} \left[\phi | S \right] \right], \; \; \; B_{k'} = \mathbb{E} \left[\Psi_{k'}(S) \right]$
+
+Select the correct answer:     
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $\vec{\theta} = \frac{1}{2 \lambda} {\bf B}^T {\bf A }^{-1}$
+- $\vec{\theta} = \frac{1}{2 \lambda} {\bf B}^{-1} {\bf A}^{-1}$
+- $\vec{\theta} = \frac{1}{2 \lambda} {\bf A}^{-1} {\bf B}$
+
+<br><br>
+
+# Appendix
+
+## Blooper
+
+## Documenting File Creation 
+
+It's useful to record some information about how your file was created.
+
+- File creation date: 2021-05-02
+- File latest updated date: `r today('Asia/Tokyo')`
+- `r R.version.string`
+- [**rmarkdown** package](https://github.com/rstudio/rmarkdown) version: `r packageVersion('rmarkdown')`
+- File version: 1.0.0
+- Author Profile: [®γσ, Eng Lian Hu](https://github.com/scibrokes/owner)
+- GitHub: [Source Code](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance)
+- Additional session information:
+
+```{r info, warning = FALSE, results = 'asis'}
+suppressMessages(require('dplyr', quietly = TRUE))
+suppressMessages(require('magrittr', quietly = TRUE))
+suppressMessages(require('formattable', quietly = TRUE))
+suppressMessages(require('knitr', quietly = TRUE))
+suppressMessages(require('kableExtra', quietly = TRUE))
+
+sys1 <- devtools::session_info()$platform %>% 
+  unlist %>% data.frame(Category = names(.), session_info = .)
+rownames(sys1) <- NULL
+
+sys2 <- data.frame(Sys.info()) %>% 
+  dplyr::mutate(Category = rownames(.)) %>% .[2:1]
+names(sys2)[2] <- c('Sys.info')
+rownames(sys2) <- NULL
+
+if (nrow(sys1) == 9 & nrow(sys2) == 8) {
+  sys2 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  Sys.info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+} else {
+  sys1 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  session_info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+}
+
+sys <- cbind(sys1, sys2) %>% 
+  kbl(caption = 'Additional session information:') %>% 
+  kable_styling(bootstrap_options = c('striped', 'hover', 'condensed', 'responsive')) %>% 
+  row_spec(0, background = 'DimGrey', color = 'yellow') %>% 
+  column_spec(1, background = 'CornflowerBlue', color = 'red') %>% 
+  column_spec(2, background = 'grey', color = 'black') %>% 
+  column_spec(3, background = 'CornflowerBlue', color = 'blue') %>% 
+  column_spec(4, background = 'grey', color = 'white') %>% 
+  row_spec(9, bold = T, color = 'yellow', background = '#D7261E')
+
+rm(sys1, sys2)
+sys
+```
+
+## Reference
+
+<br>
+
+---
+
+<br>

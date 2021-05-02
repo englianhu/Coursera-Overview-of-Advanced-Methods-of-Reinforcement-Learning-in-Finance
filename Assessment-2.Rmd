@@ -1,0 +1,342 @@
+---
+title: "<img src='figure/coursera.jpg' width='37'> <img src='figure/nyu.png' width='240'>"
+subtitle: "<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span> (Assessment 2)"
+author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='figure/quantitative trader 1.jpg' width='12'> <img src='figure/ENG.jpg' width='24'> ®"
+date: "`r lubridate::today('Asia/Tokyo')`"
+output:
+  html_document: 
+    mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+    code_folding: hide
+    css: CSSBackgrounds.css
+---
+
+<br>
+<span style='color:green'>**Theme Song**</span>
+<br>
+
+<audio src="music/NY-BJ-Dream.mp3" controls></audio>
+<br>
+
+------
+
+<br>
+
+# テスト 2 (Assessment 2)
+
+# Introduction
+
+合計点数 <span style='color:#3C5C; background-color:#011A27;'>60点</span>
+
+<br>
+
+## 1. 質問 1 (Problem 1: How to get infinitely rich)
+
+This is really easy, if you live in the GBM world with low volatility. All you need to do is to hold onto a stock and wait. But first you need to compute how much your stock will value at some future time t if its current value at time $t = 0$ is $X_0$.
+
+Question: How do you obtain the exponential growth (that will make you infinitely rich)
+
+$$X_t = X_0 e^{r_f t} \; \; \;  (1)$$
+
+from the GBM model in the $\lim_{\sigma = 0}$ that reads
+
+$$d X_t = r_f X_t dt(2)$$
+
+Select all correct answers:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- Eq.(2) is a simple ordinary differential equation (ODE). To solve it, I divide both sides of Eq.(2) by $X_t$, then take integrals on both sides of the resulting equation. Then I take into account the initial condition to fix the arbitrary constant of integration.
+
+- I google it.
+
+- I differentiate Eq.(1) with respect to time.
+
+<br><br>
+
+## 2. 質問 2 (The Verhulst model)
+
+Problem 2: Time-dependent solution 
+
+The Verhulst model is defined by the following ODE 
+
+$$d X_t = \rho X_t \left( \frac{\lambda}{\rho} - X_t \right) dt \; \; \; (3)$$
+
+where $X_t$ is the total market capitalization, and $\rho$ and $\lambda$ are two parameters. 
+
+Solve this ODE with the initial condition $X_{t_0} = X_0$ (Hint: move all X dependent terms to the left-hand side, and all $t$ - dependent terms to the right-hand-side, then take integrals on both sides). You result should be equivalent to one or more of formulas below. 
+
+Select all correct answers: 
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $X_t = X_0 \frac{\lambda}{\rho} / \left[ 1 - \left( 1 - \frac{\lambda}{\rho X_0} \right) e^{- \lambda t} \right]$
+
+- $X_t = X_0 e^{\rho t} / \left[ 1 + \frac{\rho}{\lambda} X_0 \left( e^{\rho t} - 1 \right) \right]$
+
+- $X_t = X_0 e^{\lambda t} / \left[ 1 + \frac{\rho}{\lambda} X_0 \left( e^{\lambda t} - 1 \right) \right]$
+
+<br><br>
+
+## 3. 質問 3 (Problem 3: The Verhulst model and the logistic map)
+
+A discrete-time Verhulst model 
+
+$$\Delta X_t = \kappa X_t \left( \frac{\theta}{\kappa} - X_t \right) \Delta t \; \; \; (4)$$
+
+can be reformulated as the so-called logistic map - one of the classical examples of systems that admit chaos. This is obtained by re-grouping terms and expressing (4) as an update equation for a dimensionless variable $u_t$ obtained from $X_t$ by a linear transformation:
+
+$$u_{t+1} = \alpha u_{t} \left( 1 - u_t \right) \; \; \; (5)$$
+
+This equation is called the logistic map. For any value of $0 ≤ \alpha ≤ 4$, the transform (8) maps a unit interval $[0, 1]$ onto itself. The logistic map is a particular case of a more general class of map functions $u_{t+1} = f(u_t)$ with $f(u) = \alpha u(1-u)$.
+
+Find the expressions for the dimensionless variable $u_t$ and parameter a in terms of the original parameters of the Verhulst model. Select all correct answers: 
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $u_t = \frac{1+ \theta \Delta t}{\kappa \Delta t}$ and $\alpha = \kappa \Delta t$
+
+- $u_t = \frac{\kappa \Delta t}{1+ \theta \Delta t} X_t$ and $\alpha = \kappa \Delta t$
+
+- $u_t = \frac{\kappa \Delta t}{1+ \theta \Delta t}$ and $\alpha = 1 + \theta \Delta t$
+
+<br><br>
+
+## 4. 質問 4 (Problem 4: Fixed points)
+
+A fixed point of a map $x_{t+1} = F(x_t)$ for some mapping function $F(x)$ is a point $x_{\star}$ that provides a stationary solution of the mapping equation, i.e. $x_{\star} = F(x_{\star})$. Find all fixed points of the logistic map equation
+
+$$u_{t+1} = \alpha u_t (1 − u_t) \; \; \; (6)$$
+
+assuming that $0 ≤ u_t ≤ 1$. Select all correct answers:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $u_{\star} = 1$
+- $u_{\star} = 0$    
+- $u_{\star} = 0$ and $u_{\star} = 1 - \frac{1}{\alpha}$
+
+<br><br>
+
+## 5. 質問 5 (Problem 5: Stability of fixed points)
+
+A fixed point $x_{\star}$ of a map $x_{t+1} = f(x_t)$ is stable if it attracts all starting points $x_0$ as long as they are close enough to $x_{\star}$. In other words, it means that iterations $x_0 \to x_1 \ldots → x_{\tau}$ should converge to $x_{\star}$.
+
+Let $\delta_t = x_t − x_{\star}$ is the running distance of the
+process from the fixed point. Assuming that $\delta_t$ is small in comparison to $x_t$, we obtain the approximation to the law of $\delta_t$ from the law of $x_t$:
+
+$$\delta_{t+1} = \left| x_{t+1} - x_{\star} \right| =  \left| f( x_{t}) -  x_{\star} \right| =  \left| f( x_{\star} + \delta_t) -  x_{\star} \right|\simeq \left| \frac{d f (x_{\star})}{d x_{\star}} \right| \, \delta_t$$
+
+Therefore, fixed point is stable if the factor in front of $\delta_t$ is less than one. If the absolute value of the derivative is larger than one, the fixed point is unstable.
+
+Apply this formula for the specific case when function $f(x)$ is given by the logistic map. Assume that $3 < a ≤ 4$. Which one of the following statements is correct for this range of a? Select all
+correct answers:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $u_{\star} = 0$ is unstable and $u_{\star} = 1 - \frac{1}{\alpha}$ is unstable.
+
+- $u_{\star} = 0$ is stable, and $u_{\star} = 1$ is stable.
+
+- $u_{\star} = 0$ is stable and $u_{\star} = 1 - \frac{1}{\alpha}$ is unstable.
+
+- $u_{\star} = 0$ is stable and $u_{\star} = 1 - \frac{1}{\alpha}$ is stable.
+
+- $u_{\star} = 0$ is unstable and $u_{\star} = 1 - \frac{1}{\alpha}$ is stable.
+
+<br><br>
+
+## 6. 質問 6 (Problem 6: Chaos in the logistic map)
+
+When the value of parameter $\alpha$ in the logistic map equation 
+
+$$u_{t+1} = \alpha u_{t} \left( 1 - u_t \right) \; \; \; (8)$$
+
+gradually increases, it leads to progressively more complex behavior for values above $\alpha = 3$. This happens because for $\alpha > 3$, both fixed points $x_{\star} = 0$ and $x_{\star} = 1 - \frac{1}{\alpha}$ become repellent. In this case, trajectories that initially start at nearly identical values progressively diverge as the iteration increases. Such behavior is called chaotic. This happens if aa exceeds some critical value $\alpha_{\infty} \simeq 3.56$. For values $3 < \alpha \leq \alpha_{\infty}$, there is a regime of bifurcations. More specifically, there is a sequence of values $\left\{ \alpha_n \right\}$ for $n = 1, 2, \ldots$ such that for all values of $\alpha$ such that $\alpha_{n-1} < \alpha < \alpha_{n}$, a limiting behavior is described by a stable cycle with  $2^{\alpha-1}$ elements $x_0^{\star}, x_{1}^{\star}, x_{2^{n-1}-1}$. In this regime, a system iterates between these points in after entering a stable regime starting from an arbitrary initial value. When $\alpha = \alpha_{n}$, a period bifurcation happens, and there is a new stable cycle of length  2^{n} 2 
+n
+  for all values   a_{n} < a < a_{n+1} a 
+n
+​
+ <a<a 
+n+1
+​
+ ,  etc.   This means that as aa passes the value  a_{n} a 
+n
+​
+ , two more points of a periodic orbit emerge, while the previously stable  2^{n-1} 2 
+n−1
+  points become unstable and re-adjust their positions to become stable again.
+
+ It turns out that elements of a stable cycle can be calculated by computing fixed points of (even) iterated powers of the map, such as T(2)≡f(2)(x)=f(f(x))$,$T(4)=T(2)(T(2)), and so on. Now compute the fixed points of the second iterated operator   T^{(2)} \equiv f^{(2)}(x) = f \left(f (x) \right) T 
+(2)
+ ≡f 
+(2)
+ (x)=f(f(x)). 
+
+(Hint: The fixed points equation   f \left( f (x) \right) - x = 0 f(f(x))−x=0 is a quartic equation. Two of his roots are the stable points of the original map  f (x) x = 0 f(x)x=0 and  x = 1 - 1/a x=1−1/a. Therefore, the fixed point equation should have the form of  x ( x - 1 + 1/a) x(x−1+1/a) times a second-order polynomial. Lets denote this polynomial as  p(x) = a x^2 + b x + c p(x)=ax 
+2
+ +bx+c where  a, b, c a,b,c are coefficients that you can find by substituting this polynomial and the factor  x ( x - 1 + 1/a) x(x−1+1/a) into the original quartic fixed point equation   f \left( f (x) \right) - x = 0 f(f(x))−x=0, and comparing coefficients in front of different powers of xx in both expressions. Once you found coefficients  a, b, c a,b,c, the remaining two stable points  x_{1,2} x 
+1,2
+​
+  are computed as roots of this quadratic equation.)
+
+You can check that the derivative of  f^{(2)} f 
+(2)
+  at these points are given by the expression  - a^2 + 2 a + 4 −a 
+2
+ +2a+4. This quantity decreases as  a a increases, until it reaches the value of  -1 −1 when  a = 1 + \sqrt{6} a=1+ 
+6
+​
+ . At this value of  a a, points  x_{1,2} x 
+1,2
+​
+  become unstaible. The point  a = a_1 = 1 + \sqrt{6} \simeq 3.449 a=a 
+1
+​
+ =1+ 
+6
+​
+ ≃3.449 is a point of a period doubling bifurcation. For values  a > a_1 a>a 
+1
+​
+ , points of period four would be stable, until  a a reaches the value  a_2 = 3.54409 a 
+2
+​
+ =3.54409 when period eight points become stable, and so on. For some critical value  a_{\infty} \simeq 3.57 a 
+∞
+​
+ ≃3.57, the period diverges. For the interval  a_{\infty} < a \leq 4 a 
+∞
+​
+ <a≤4, the logistic map exhibits a chaotic behavior when trajectories that are arbitrarily close initially become exponentially diverging from one another with time (The speed of their divergence is called the Lyapunov exponent.).
+
+The most remarkable property of chaotic behavior is its universality. It turns out that chaotic dynamics arise for an arbitrary non-linear map  f(x) f(x) as long as, after rescaling the variable  x x to a unit interval  [0,1] [0,1], the function  f(x) f(x) has only one maximum and no other extrema on this interval (see e.g. H. Schuster, {\it Deterministic Chaos: an Introduction}, Physik-Verlag, Weinheim 1984). 
+
+Select all correct answers:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+  x_{1,2} =   \frac{1}{2} + \frac{1}{2a}  \pm  \frac{1}{2 a} \sqrt{(a+1)(a-3)}x 
+1,2
+​
+ = 
+2
+1
+​
+ + 
+2a
+1
+​
+ ± 
+2a
+1
+​
+  
+(a+1)(a−3)
+​
+ .
+
+
+ x_{1,2} =  - \frac{1}{2} - \frac{1}{2a}  \pm  \frac{1}{2 a} \sqrt{(a+1)(a-3)} x 
+1,2
+​
+ =− 
+2
+1
+​
+ − 
+2a
+1
+​
+ ± 
+2a
+1
+​
+  
+(a+1)(a−3)
+​
+ .
+
+
+ x_{1,2} =  - \frac{1}{2} \pm \frac{1}{2a}  x 
+1,2
+​
+ =− 
+2
+1
+​
+ ± 
+2a
+1
+​
+ .
+
+# Appendix
+
+## Blooper
+
+## Documenting File Creation 
+
+It's useful to record some information about how your file was created.
+
+- File creation date: 2021-05-02
+- File latest updated date: `r today('Asia/Tokyo')`
+- `r R.version.string`
+- [**rmarkdown** package](https://github.com/rstudio/rmarkdown) version: `r packageVersion('rmarkdown')`
+- File version: 1.0.0
+- Author Profile: [®γσ, Eng Lian Hu](https://github.com/scibrokes/owner)
+- GitHub: [Source Code](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance)
+- Additional session information:
+
+```{r info, warning = FALSE, results = 'asis'}
+suppressMessages(require('dplyr', quietly = TRUE))
+suppressMessages(require('magrittr', quietly = TRUE))
+suppressMessages(require('formattable', quietly = TRUE))
+suppressMessages(require('knitr', quietly = TRUE))
+suppressMessages(require('kableExtra', quietly = TRUE))
+
+sys1 <- devtools::session_info()$platform %>% 
+  unlist %>% data.frame(Category = names(.), session_info = .)
+rownames(sys1) <- NULL
+
+sys2 <- data.frame(Sys.info()) %>% 
+  dplyr::mutate(Category = rownames(.)) %>% .[2:1]
+names(sys2)[2] <- c('Sys.info')
+rownames(sys2) <- NULL
+
+if (nrow(sys1) == 9 & nrow(sys2) == 8) {
+  sys2 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  Sys.info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+} else {
+  sys1 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  session_info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+}
+
+sys <- cbind(sys1, sys2) %>% 
+  kbl(caption = 'Additional session information:') %>% 
+  kable_styling(bootstrap_options = c('striped', 'hover', 'condensed', 'responsive')) %>% 
+  row_spec(0, background = 'DimGrey', color = 'yellow') %>% 
+  column_spec(1, background = 'CornflowerBlue', color = 'red') %>% 
+  column_spec(2, background = 'grey', color = 'black') %>% 
+  column_spec(3, background = 'CornflowerBlue', color = 'blue') %>% 
+  column_spec(4, background = 'grey', color = 'white') %>% 
+  row_spec(9, bold = T, color = 'yellow', background = '#D7261E')
+
+rm(sys1, sys2)
+sys
+```
+
+## Reference
+
+<br>
+
+---
+
+<br>
