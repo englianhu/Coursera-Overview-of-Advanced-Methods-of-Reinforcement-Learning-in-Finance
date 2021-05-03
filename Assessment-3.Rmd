@@ -27,7 +27,7 @@ output:
 
 <br>
 
-# テスト 2 (Assessment 3)
+# テスト 3 (Assessment 3)
 
 # Introduction
 
@@ -71,7 +71,7 @@ where $V(y)$ is some potential, and $y_t$ satisfies the SDE $dy_t = f(y_t) dt + 
 
 - $\int_{y_0}^{y_f} \frac{\partial V(y)}{\partial y} d y = V(y_f) - V(y_0)$
 
-- $\int_{y_0}^{y_f} \frac{\partial V(y)}{\partial y} d y = V(y_f) - V(y_0) - \frac{1}{2} \sigma^2  \int_{0}^{t}  \frac{\partial^2 V(y)}{\partial y^2} dt$
+- ${\color{Green}\int_{y_0}^{y_f} \frac{\partial V(y)}{\partial y} d y = V(y_f) - V(y_0) - \frac{1}{2} \sigma^2  \int_{0}^{t}  \frac{\partial^2 V(y)}{\partial y^2} dt}$
 
 - $\int_{y_0}^{y_f} \frac{\partial V(y)}{\partial y} d y = V(y_f) - V(y_0) + \frac{1}{2} \sigma^2  \int_{0}^{t}  \frac{\partial^2 V(y)}{\partial y^2} dt$
 
@@ -119,7 +119,7 @@ Select the correct answer.
 
 - $V_{eff}(x) = \kappa x  + \frac{g}{2} x^2$
 
-- $V_{eff}(x) = \kappa x  + \frac{g}{2} x^2 - \left(\theta - \sigma^2 \right) \log x$
+- ${\color{Green}V_{eff}(x) = \kappa x  + \frac{g}{2} x^2 - \left(\theta - \sigma^2 \right) \log x}$
 
 <br><br>
 
@@ -135,7 +135,7 @@ Compute the critical value $\theta_{\star}$ such that for $\theta < \theta_{\sta
 
 - $\theta_{\star}  = - \frac{\sigma^2}{2}$
 
-- $\theta_{\star}  =  \frac{\sigma^2}{2}$
+- ${\color{Green}\theta_{\star}  =  \frac{\sigma^2}{2}}$
 
 <br><br>
 
@@ -157,7 +157,7 @@ Select all correct answers.
 
 <span style='color:#3C5C; background-color:#011A27;'>10点</span>
 
-- $V_{eff}(y) =    -  \left( \theta - \frac{\sigma^2}{2} \right) y + \kappa e^{y} + \frac{1}{2} g e^{2y}$
+- ${\color{Green}V_{eff}(y) =    -  \left( \theta - \frac{\sigma^2}{2} \right) y + \kappa e^{y} + \frac{1}{2} g e^{2y}}$
 
 - $V_{eff}(y) = - \theta  y + \kappa e^{y} + \frac{1}{2} g e^{2y}$
 
@@ -185,370 +185,53 @@ The imaginary time Schrödinger equation (also called the Euclidean  Schrödinge
 
 Compute this operator, and select the correct answer from the below.
 
-10点
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
 
-  \mathcal{H}_{FP} =  \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2  H 
-FP
-​
- = 
-2
-σ 
-4
- 
-​
-  
-∂y 
-2
- 
-∂ 
-2
- 
-​
- + 
-2
-1
-​
- ( 
-∂y
-∂V
-​
- ) 
-2
- 
+- $\mathcal{H}_{FP} =  \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2$
 
+- ${\color{Green}\mathcal{H}_{FP} =  - \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2+ \frac{\sigma^2}{2} \frac{\partial^2 V}{\partial y^2}}$
 
- \mathcal{H}_{FP} =  - \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2+ \frac{\sigma^2}{2} \frac{\partial^2 V}{\partial y^2}  H 
-FP
-​
- =− 
-2
-σ 
-4
- 
-​
-  
-∂y 
-2
- 
-∂ 
-2
- 
-​
- + 
-2
-1
-​
- ( 
-∂y
-∂V
-​
- ) 
-2
- + 
-2
-σ 
-2
- 
-​
-  
-∂y 
-2
- 
-∂ 
-2
- V
-​
- 
+- $\mathcal{H}_{FP} =  - \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2- \frac{\sigma^2}{2} \frac{\partial^2 V}{\partial y^2}$
 
+<br><br>
 
-  \mathcal{H}_{FP} =  - \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2- \frac{\sigma^2}{2} \frac{\partial^2 V}{\partial y^2}  H 
-FP
-​
- =− 
-2
-σ 
-4
- 
-​
-  
-∂y 
-2
- 
-∂ 
-2
- 
-​
- + 
-2
-1
-​
- ( 
-∂y
-∂V
-​
- ) 
-2
- − 
-2
-σ 
-2
- 
-​
-  
-∂y 
-2
- 
-∂ 
-2
- V
-​
- 
+## 6. 質問 6 (Fokker-Plank, Schrödinger and supersymmetry)
 
-6.
-質問 6
-Fokker-Plank, Schrödinger and supersymmetry
+The FP Hamiltonian that you computed in the previous problem has a remarkable property of being a factorizable operator: it can be represented as a product of two first-order operators $A^+$ and $A$:
 
-The FP Hamiltonian that you computed in the previous problem has a remarkable property of being a factorizable operator: it can be represented as a product of two first-order operators  A^{+} A 
-+
-  and  A A:
+$$\mathcal{H}_{FP} = A^{+} A \; \; \; (16)$$
 
-\mathcal{H}_{FP} =   A^{+} AH 
-FP
-​
- =A 
-+
- A   (16)
+Find the form of operators $A^+$ and $A$. 
 
-Find the form of operators  A^{+} A 
-+
-  and  A A. 
+Once we have operators $A$ and $A^+$ we can switch their order to obtain the partner Hamiltonian $\mathcal{H}_{FP}^+$:
 
-Once we have operators  A  A and  A^{+} A 
-+
-  we can switch their order to obtain the partner Hamiltonian   \mathcal{H}_{FP}^{+} H 
-FP
-+
-​
- :
+$$\mathcal{H}_{FP}^{+} =  A A^+ \; \; \; (17)$$
 
-\mathcal{H}_{FP}^{+} =  A A^{+}H 
-FP
-+
-​
- =AA 
-+
-   (17)
+The $\mathcal{H}_{FP}^+$ is called the backward FP Hamiltonian, because it corresponds to the {\it backward} FP (Kolmogorov) equation.
 
-The    \mathcal{H}_{FP}^{+} H 
-FP
-+
-​
-  is called the backward FP Hamiltonian, because it corresponds to the {\it backward} FP (Kolmogorov) equation.
+The pair of Hamiltonians $\mathcal{H}_{FP}$ and $\mathcal{H}_{FP}^+$ are {\it iso-spectral}: their eigenvalues are all non-negative and degenerate, except possibly for an eigenstate with the zero eigenvalue, which may be non-degenerate. 
 
-The pair of Hamiltonians    \mathcal{H}_{FP} H 
-FP
-​
-  and   \mathcal{H}_{FP}^{+} H 
-FP
-+
-​
-  are {\it iso-spectral}: their eigenvalues are all non-negative and degenerate, except possibly for an eigenstate with the zero eigenvalue, which may be non-degenerate. 
+The degeneracy of spectra of Hamiltonians $\mathcal{H}_{FP}$ and $\mathcal{H}_{FP}^+$ can be seen as follows. 
 
-The degeneracy of spectra of Hamiltonians    \mathcal{H}_{FP} H 
-FP
-​
-  and   \mathcal{H}_{FP}^{+} H 
-FP
-+
-​
-  can be seen as follows. 
+If $\Psi_n$ is an eigenvector of $\mathcal{H}_{FP}$ with an eigenvalue $E_n$, than the state $A\Psi_n$ will be an eigenstate of the partner Hamiltonian $H_{FP}^+$ with the same eigenvalue (energy) $E_n$. This is seen from the following transformation
 
-If  \Psi_n Ψ 
-n
-​
-  is an eigenvector of  \mathcal{H}_{FP} H 
-FP
-​
-  with an eigenvalue  E_n E 
-n
-​
- , than the state  A  \Psi_n AΨ 
-n
-​
-  will be an eigenstate of the partner Hamiltonian  H_{FP}^{+} H 
-FP
-+
-​
-  with the same eigenvalue (energy)  E_n E 
-n
-​
- . This is seen from the following transformation
+$$\mathcal{H}_{FP}^{+}  A  \Psi_n = A A^{+} A   \Psi_n  = A \mathcal{H}_{FP}  \Psi_n = A E_n \Psi_n = E_n A \Psi_n \; \; \; (18)$$
 
-\mathcal{H}_{FP}^{+}  A  \Psi_n = A A^{+} A   \Psi_n  = A \mathcal{H}_{FP}  \Psi_n = A E_n \Psi_n = E_n A \Psi_nH 
-FP
-+
-​
- AΨ 
-n
-​
- =AA 
-+
- AΨ 
-n
-​
- =AH 
-FP
-​
- Ψ 
-n
-​
- =AE 
-n
-​
- Ψ 
-n
-​
- =E 
-n
-​
- AΨ 
-n
-​
-    (18)
+which means that all eigenstates of spectra of $H_{FP}$ except a lowest eigenstate with eigenvalue zero 'vacuum' state with energy should be degenerate in energy with eigenstates of the partner Hamiltonian $H_{FP}^+$. This is a manifestation of a hidden symmetry of stochastic differential equation (and having a counterpart in quantum mechanics and quantum field theory) called supersymmetry (SUSY). SUSY is very helpful for many computational problems, as sometimes quantities that are hard to compute with the original Hamiltonian $H_{FP}$ can be more easily computed using the SUSY partner Hamiltonian $H_{FP}^+$, and then mapped back onto the original problem using SUSY transformations.
 
-which means that all eigenstates of  spectra of  H_{FP} H 
-FP
-​
-  except a lowest eigenstate  with eigenvalue zero 'vacuum' state with energy should be degenerate in energy with eigenstates of the partner Hamiltonian  H_{FP}^{+} H 
-FP
-+
-​
- . This is a manifestation of a hidden symmetry of stochastic differential equation  (and having a counterpart in quantum mechanics and quantum field theory) called supersymmetry (SUSY). SUSY is very helpful for many computational problems, as sometimes quantities that are hard to compute with the original Hamiltonian   H_{FP} H 
-FP
-​
-  can be more easily computed using the SUSY partner Hamiltonian 
-
- H_{FP}^{+} H 
-FP
-+
-​
- , and then mapped back onto the original problem using SUSY transformations.
-
-For more details on supersymmetry in quantum mechanics, see e.g. the book by S. Weinberg, Classical Solutions in Quantum Field Theory: Solitons and Instantons in High Energy Physics, Cambridge University Press  (2012).
+For more details on supersymmetry in quantum mechanics, see e.g. the book by S. Weinberg, Classical Solutions in Quantum Field Theory: Solitons and Instantons in High Energy Physics, Cambridge University Press (2012).
 
 Select the correct answers from the answers below. 
 
-10点
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
 
- A = \frac{1}{\sqrt{2}} \left[\frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ - \frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right]  A= 
-2
-​
- 
-1
-​
- [ 
-∂y
-∂
-​
- + 
-∂y
-∂V
-​
- ],A 
-+
- = 
-2
-​
- 
-1
-​
- [− 
-∂y
-∂
-​
- + 
-∂y
-∂V
-​
- ]
+- $A = \frac{1}{\sqrt{2}} \left[\frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ - \frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right]$
 
+- $A = \frac{1}{\sqrt{2}} \left[  \frac{1}{\sigma}  \frac{\partial}{\partial y} + \sigma \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ -  \frac{1}{\sigma} \frac{\partial}{\partial y} + \sigma  \frac{\partial V}{\partial y} \right]$
 
- A = \frac{1}{\sqrt{2}} \left[  \frac{1}{\sigma}  \frac{\partial}{\partial y} + \sigma \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ -  \frac{1}{\sigma} \frac{\partial}{\partial y} + \sigma  \frac{\partial V}{\partial y} \right]  A= 
-2
-​
- 
-1
-​
- [ 
-σ
-1
-​
-  
-∂y
-∂
-​
- +σ 
-∂y
-∂V
-​
- ],A 
-+
- = 
-2
-​
- 
-1
-​
- [− 
-σ
-1
-​
-  
-∂y
-∂
-​
- +σ 
-∂y
-∂V
-​
- ]
+- ${\color{Green}A = \frac{1}{\sqrt{2}} \left[ \sigma^2 \frac{\partial}{\partial y} +  \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ - \sigma^2 \frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right]}$
 
-
- A = \frac{1}{\sqrt{2}} \left[ \sigma^2 \frac{\partial}{\partial y} +  \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ - \sigma^2 \frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right]  A= 
-2
-​
- 
-1
-​
- [σ 
-2
-  
-∂y
-∂
-​
- + 
-∂y
-∂V
-​
- ],A 
-+
- = 
-2
-​
- 
-1
-​
- [−σ 
-2
-  
-∂y
-∂
-​
- + 
-∂y
-∂V
-​
- ]
+<br><br>
 
 # Appendix
 

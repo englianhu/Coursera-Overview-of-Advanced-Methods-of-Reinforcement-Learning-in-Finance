@@ -84,7 +84,7 @@
       
       3.1.8) 動画: 講座 [The Fokker-Planck Equation and Quantum Mechanics. Duration: 12分](https://www.youtube.com/watch?v=eYd1F2zQTs4)
       
-    3.2) [Week 3 Assessment]()
+    3.2) [Week 3 Assessment](https://rpubs.com/englianhu/764493)
     
 4) Week 4 : Other Applications of Reinforcement Learning: P-2-P Lending, Cryptocurrency, etc.
     
