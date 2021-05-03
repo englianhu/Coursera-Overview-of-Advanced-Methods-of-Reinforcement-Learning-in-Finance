@@ -1,0 +1,139 @@
+---
+title: "<img src='figure/coursera.jpg' width='37'> <img src='figure/nyu.png' width='240'>"
+subtitle: "<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span> (Final Project)"
+author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='figure/quantitative trader 1.jpg' width='12'> <img src='figure/ENG.jpg' width='24'> ®"
+date: "`r lubridate::today('Asia/Tokyo')`"
+output:
+  html_document: 
+    mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+    code_folding: hide
+    css: CSSBackgrounds.css
+---
+
+<br>
+<span style='color:green'>**Theme Song**</span>
+<br>
+
+<audio src="music/NY-BJ-Dream.mp3" controls></audio>
+<br>
+
+------
+
+<br>
+
+# 受講生によるテスト：(Final Project)
+
+# Introduction
+
+合計点数 <span style='color:#3C5C; background-color:#011A27;'>60点</span>
+
+<br>
+
+## 説明
+
+This is a project that will be graded based on a peer-to-peer review. The project consists of four parts. The maximum score for each part is 10, so that maximum score you can give your peers (and they can give you) is 40. The parts are as follows (more detailed instructions are in specific cells below).
+
+### Review criteria
+
+- **Part 1**: Estimate the model using the DJI portfolio of 30 stocks, first without signals, and then using simple signals such as simple moving averages constructed below (Max 10 point).
+
+- **Part 2**: Explore the implications of calibrated model parameters for default probabilities of stocks in your portfolio. Present your conclusions and observations. (Max 10 point).
+
+- **Part 3**: Experiment with other signals and investigate the impact on model calibration obtained with alternative signals. Present your conclusions and observations. (Max 10 points).
+
+- **Part 4**: Show me something else. This part is optional. Come up with your own idea of an interesting analysis. For example, you can repeat your analysis for the S&P portfolio. Or maybe you can build a strategy using an optimal market-implied policy estimated from this model, and compare it with PCA and absorption ratio strategies that we built in Course 2. Or anything else. (Max 10 points).
+Files for this project
+
+Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Coursera_course_4.ipynb](https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb) and [dja_cap.csv](https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/view/dja_cap.csv)
+
+<br><br>
+
+## 自分の提出物
+
+プロジェクト名 *
+プロジェクトにわかりやすいタイトルを付けてください
+
+- **Part 1**: Estimate the model using the DJI portfolio of 30 stocks, first without signals, and then using simple signals such as simple moving averages constructed below (Max 10 point).
+
+- **Part 2**: Explore the implications of calibrated model parameters for default probabilities of stocks in your portfolio. Present your conclusions and observations. (Max 10 point).
+
+- **Part 3**: Experiment with other signals and investigate the impact on model calibration obtained with alternative signals. Present your conclusions and observations. (Max 10 points).
+
+- **Part 4**: Show me something else. This part is optional. Come up with your own idea of an interesting analysis. For example, you can repeat your analysis for the S&P portfolio. Or maybe you can build a strategy using an optimal market-implied policy estimated from this model, and compare it with PCA and absorption ratio strategies that we built in Course 2. Or anything else. (Max 10 points).
+
+<br><br>
+
+## ディスカッション
+
+<br><br>
+
+# Appendix
+
+## Blooper
+
+## Documenting File Creation 
+
+It's useful to record some information about how your file was created.
+
+- File creation date: 2021-05-03
+- File latest updated date: `r today('Asia/Tokyo')`
+- `r R.version.string`
+- [**rmarkdown** package](https://github.com/rstudio/rmarkdown) version: `r packageVersion('rmarkdown')`
+- File version: 1.0.0
+- Author Profile: [®γσ, Eng Lian Hu](https://github.com/scibrokes/owner)
+- GitHub: [Source Code](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance)
+- Additional session information:
+
+```{r info, warning = FALSE, results = 'asis'}
+suppressMessages(require('dplyr', quietly = TRUE))
+suppressMessages(require('magrittr', quietly = TRUE))
+suppressMessages(require('formattable', quietly = TRUE))
+suppressMessages(require('knitr', quietly = TRUE))
+suppressMessages(require('kableExtra', quietly = TRUE))
+
+sys1 <- devtools::session_info()$platform %>% 
+  unlist %>% data.frame(Category = names(.), session_info = .)
+rownames(sys1) <- NULL
+
+sys2 <- data.frame(Sys.info()) %>% 
+  dplyr::mutate(Category = rownames(.)) %>% .[2:1]
+names(sys2)[2] <- c('Sys.info')
+rownames(sys2) <- NULL
+
+if (nrow(sys1) == 9 & nrow(sys2) == 8) {
+  sys2 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  Sys.info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+} else {
+  sys1 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  session_info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+}
+
+sys <- cbind(sys1, sys2) %>% 
+  kbl(caption = 'Additional session information:') %>% 
+  kable_styling(bootstrap_options = c('striped', 'hover', 'condensed', 'responsive')) %>% 
+  row_spec(0, background = 'DimGrey', color = 'yellow') %>% 
+  column_spec(1, background = 'CornflowerBlue', color = 'red') %>% 
+  column_spec(2, background = 'grey', color = 'black') %>% 
+  column_spec(3, background = 'CornflowerBlue', color = 'blue') %>% 
+  column_spec(4, background = 'grey', color = 'white') %>% 
+  row_spec(9, bold = T, color = 'yellow', background = '#D7261E')
+
+rm(sys1, sys2)
+sys
+```
+
+## Reference
+
+<br>
+
+---
+
+<br>
