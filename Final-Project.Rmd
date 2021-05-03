@@ -185,6 +185,11 @@ sys
 
 ## Reference
 
+1) [joelowj/Machine-Learning-and-Reinforcement-Learning-in-Finance](https://github.com/joelowj/Machine-Learning-and-Reinforcement-Learning-in-Finance)
+2) [AhmedLabbaali/Reinforcement-Learning-in-Finance-](https://github.com/AhmedLabbaali/Reinforcement-Learning-in-Finance-)
+3) [AayushMandhyan/ML-RL-for-Finance](https://github.com/AayushMandhyan/ML-RL-for-Finance)
+4) [Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization](https://github.com/Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization)
+
 <br>
 
 ---

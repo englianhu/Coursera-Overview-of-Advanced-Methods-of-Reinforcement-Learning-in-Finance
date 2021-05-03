@@ -309,6 +309,8 @@ div.tocify {
 </div>
 <div id="answer" class="section level2" number="2.2">
 <h2 number="2.2"><span class="header-section-number">2.2</span> Answer</h2>
+<div id="load-packages" class="section level3" number="2.2.1">
+<h3 number="2.2.1"><span class="header-section-number">2.2.1</span> Load Packages</h3>
 <p><span style="color:green"><strong>Load Packages</strong></span></p>
 <pre class="r"><code>if(!suppressPackageStartupMessages(require(&#39;BBmisc&#39;))) {
   install.packages(&#39;BBmisc&#39;, dependencies = TRUE, INSTALL_opts = &#39;--no-lock&#39;)
@@ -321,12 +323,9 @@ pkgs &lt;- c(&#39;devtools&#39;, &#39;knitr&#39;, &#39;kableExtra&#39;, &#39;tin
           &#39;feather&#39;, &#39;purrr&#39;, &#39;quantmod&#39;, &#39;tidyquant&#39;, &#39;dtplyr&#39;, 
           &#39;timetk&#39;, &#39;plyr&#39;, &#39;dplyr&#39;, &#39;stringr&#39;, &#39;magrittr&#39;, 
           &#39;tidyverse&#39;, &#39;memoise&#39;, &#39;htmltools&#39;, &#39;formattable&#39;, 
-          &#39;zoo&#39;, &#39;forecast&#39;, &#39;seasonal&#39;, &#39;seasonalview&#39;, &#39;rjson&#39;, 
-          &#39;rugarch&#39;, &#39;rmgarch&#39;, &#39;mfGARCH&#39;, &#39;sparklyr&#39;, &#39;jcolors&#39;, 
-          &#39;microbenchmark&#39;, &#39;dendextend&#39;, &#39;lhmetools&#39;, &#39;ggthemr&#39;, 
-          &#39;stringr&#39;, &#39;pacman&#39;, &#39;profmem&#39;, &#39;ggthemes&#39;, &#39;flyingfox&#39;, 
-          &#39;htmltools&#39;, &#39;echarts4r&#39;, &#39;viridis&#39;, &#39;hrbrthemes&#39;, 
-          &#39;fable&#39;, &#39;fabletools&#39;, &#39;tibbletime&#39;, &#39;tdplyr&#39;, &#39;gtools&#39;)
+          &#39;zoo&#39;, &#39;forecast&#39;, &#39;rvest&#39;, &#39;xml2&#39;, 
+          &#39;microbenchmark&#39;, &#39;dendextend&#39;, &#39;stringr&#39;, &#39;echarts4r&#39;, 
+          &#39;fable&#39;, &#39;fabletools&#39;, &#39;tibbletime&#39;, &#39;tdplyr&#39;)
 
 suppressAll(lib(pkgs))
 # load_pkg(pkgs)
@@ -341,7 +340,20 @@ knitr::opts_chunk$set(cache = TRUE, warning = FALSE,
                       message = FALSE, cache.lazy = FALSE)
 
 rm(pkgs)</code></pre>
+</div>
+<div id="read-data" class="section level3" number="2.2.2">
+<h3 number="2.2.2"><span class="header-section-number">2.2.2</span> Read Data</h3>
+<pre class="r"><code>if(!file.exists(&#39;./data/dja_cap.csv&#39;)) {
+  dowload(&#39;https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/view/dja_cap.csv&#39;, &#39;./data/dja_cap.csv&#39;)
+  }
+
+dsmp &lt;- read_html(&#39;./data/dja_cap.csv&#39;)
+
+if(!file.exists(&#39;./data/dja_cap.html&#39;)) {
+  write_html(dsmp, &#39;./data/dja_cap.html&#39;)
+  }</code></pre>
 <p><br><br></p>
+</div>
 </div>
 </div>
 <div id="appendix" class="section level1" number="3">
@@ -551,6 +563,12 @@ Current time
 </div>
 <div id="reference" class="section level2" number="3.3">
 <h2 number="3.3"><span class="header-section-number">3.3</span> Reference</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://github.com/joelowj/Machine-Learning-and-Reinforcement-Learning-in-Finance">joelowj/Machine-Learning-and-Reinforcement-Learning-in-Finance</a></li>
+<li><a href="https://github.com/AhmedLabbaali/Reinforcement-Learning-in-Finance-">AhmedLabbaali/Reinforcement-Learning-in-Finance-</a></li>
+<li><a href="https://github.com/AayushMandhyan/ML-RL-for-Finance">AayushMandhyan/ML-RL-for-Finance</a></li>
+<li><a href="https://github.com/Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization">Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization</a></li>
+</ol>
 <p><br></p>
 <hr />
 <p><br></p>
