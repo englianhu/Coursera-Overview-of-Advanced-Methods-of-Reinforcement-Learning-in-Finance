@@ -1,0 +1,616 @@
+---
+title: "<img src='figure/coursera.jpg' width='37'> <img src='figure/nyu.png' width='240'>"
+subtitle: "<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span> (Assessment 3)"
+author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='figure/quantitative trader 1.jpg' width='12'> <img src='figure/ENG.jpg' width='24'> ®"
+date: "`r lubridate::today('Asia/Tokyo')`"
+output:
+  html_document: 
+    mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+    code_folding: hide
+    css: CSSBackgrounds.css
+---
+
+<br>
+<span style='color:green'>**Theme Song**</span>
+<br>
+
+<audio src="music/NY-BJ-Dream.mp3" controls></audio>
+<br>
+
+------
+
+<br>
+
+# テスト 2 (Assessment 3)
+
+# Introduction
+
+合計点数 <span style='color:#3C5C; background-color:#011A27;'>60点</span>
+
+<br>
+
+## 1. 質問 1 (Warm-up: Ito versus Stratonovich)
+
+Let $y_t$ be a stochastic variable, and $f(y_t)$ be some function of this variable. Assume that our objective is to compute an integral on an interval $[y_0, y_f]$:
+
+$$\int_{y_0}^{y_f} f(y_t) d y_t \; \; \; (1)$$
+
+When $y_t$ is a Brownian motion or a process driven by a Brownian motion, because the process is nowhere differentiable, special care is needed in order to define integrals such as Eq.(1). More specifically, it needs to be defined by providing a discretization rule for the integral (1). Introducing a discretization of the interval $[ y_0, y_f]$ into $N$ segments with a discrete set of nodes $[y_1, \ldots, y_N = y_f]$, for the value of the argument of function $f(y)$, we can take the point $(1-\alpha) y_{n-1} + \alpha y_{n}$. The discretized integral is
+
+$$\int_{y_0}^{y_f} f(y_t) d y_t = \lim_{N \rightarrow \infty} \sum_{n=1}^{N} f \left( (1-\alpha) y_{n-1} + \alpha y_n \right) \int_{y_{n-1}}^{y_n} dy_t \; \; \; (2)$$
+
+If we set here $\alpha = 0$, we obtain the Ito's integral calculus, which is an 'inverse' of Ito's differential calculus. If we take  $\alpha = \frac{1}{2}$ corresponding to the mid-point discretization for the integrand, we obtain the Stratonovich calculus.
+
+Ito's calculus is commonly used in financial modeling because it is as non-anticipating as possible. On the other hand, Stratonovich calculus corresponds to a white-noise limit of a correlated ("colored") noise, which appears a reasonable approximation for many problems in physics. Therefore, physicists tend to use Stratonovich rules when defining integrals such as (1). In these case, conventional rules of calculus can be applied to integrals such as (1).
+
+On the other hand, in finance, it is typically the Ito rules that are used to define the value of the integral (1). Very informally, you can easily obtain Ito's rule for integrals from the Ito rule for differentiation:
+
+$$df (y_t) = \frac{\partial f (y_t)}{ \partial y_t} dy_t + \frac{1}{2} \frac{\partial^2 f (y_t)}{ \partial y_t^2}   \left( dy_t \right)^2 \; \; \; (3)$$
+
+ If we move the terms $df(y_t)$ and $\frac{\partial f (y_t)}{ \partial y_t}dy_t$ to the right and left, respectively, and then formally integrate both sides from some $t_0$ to $y_f$, we obtain
+
+$$\frac{\partial f (y_t)}{ \partial y_t} dy_t  = f(y_f) - f(y_0) -  \frac{1}{2}  \int  \frac{\partial^2 f (y_t)}{ \partial y_t^2}   \left( dy_t \right)^2 =\int_{y_0}^{y_f}  \frac{\partial f (y_t)}{ \partial y_t} \circ   dy_t  -  \frac{1}{2}  \int  \frac{\partial^2 f (y_t)}{ \partial y_t^2}   \left( dy_t \right)^2 \; \; \; (4)$$
+
+then the first contribution in the right-hand-side  (RHS) of this equation can be identified with the 'naive' (or Stratonovich) value of the integral, and denoted as $\int  \frac{\partial f (y_t)}{ \partial y_t} \circ dy_t$. The second term in Eq.(4) constitutes the Ito correction.
+
+Note that if $dy_t = f(y_t) dt + \sigma g(y_t) dW_t$ with some functions $f(y), g(y)$, then the Ito correction is simply a regular integral of the form $\int \frac{\partial^2 f (y_t)}{ \partial y_t^2}  g^2(y_t) dt$.
+
+Now, assume that you have to compute the integral 
+
+$$\int_{0}^{t} \frac{\partial V(y_t)}{\partial y_t} \frac{dy_t}{dt}  dt = \int_{y_0}^{y_f}   \frac{\partial V(y)}{\partial y} dy \; \; \; (5)$$
+
+where $V(y)$ is some potential, and $y_t$ satisfies the SDE $dy_t = f(y_t) dt + \sigma dW_t$with some drift $f(y)$. Compute the  resulting Ito expression for this integral. Select all correct answers:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $\int_{y_0}^{y_f} \frac{\partial V(y)}{\partial y} d y = V(y_f) - V(y_0)$
+
+- $\int_{y_0}^{y_f} \frac{\partial V(y)}{\partial y} d y = V(y_f) - V(y_0) - \frac{1}{2} \sigma^2  \int_{0}^{t}  \frac{\partial^2 V(y)}{\partial y^2} dt$
+
+- $\int_{y_0}^{y_f} \frac{\partial V(y)}{\partial y} d y = V(y_f) - V(y_0) + \frac{1}{2} \sigma^2  \int_{0}^{t}  \frac{\partial^2 V(y)}{\partial y^2} dt$
+
+<br><br>
+
+## 2. 質問 2 (Fokker-Planck equation and equilibrium distribution)
+
+Consider the Langevin equation for dynamics of an overdamped Brownian particle in a potential $V(x)$ subject to a multiplicative noise with noise amplitude $\sigma g(x)$:
+
+$$\frac{\partial x}{\partial t} = - \frac{\partial V}{\partial x} + \sigma g(x) W_t \; \; \; (6)$$
+
+where $W_t$ is the Gaussian white noise process with unit variance. While the Langevin equation gives path-wise dynamics,  
+
+the Fokker-Planck equation (FPE) provides an equivalent probabilistic description of dynamics in terms of the probability distribution $P(x,t)$ of finding the particle in position $x$ at time $t$. The FPE has the following form:
+
+$$\frac{\partial P(x,t)}{\partial t} = \frac{\partial}{\partial x} \left[ \frac{\partial V}{\partial x} P(x,t) \right]+ \frac{\sigma^2}{2}  \frac{\partial^2}{\partial x^2}  \left[ g^2(x) P(x,t) \right]\equiv - \frac{\partial J}{\partial x} \; \; \; (7)$$
+
+where $J(x)$ is called the probability current.
+
+For a time-independent (stationary) solution $P_0(y)$, the left hand side of the FPE vanishes, while the solution $P_0(y)$ itself is determined from the requirement that the right hand side vanishes as well. We will show how to find a stationary solution for a special case when  $g(x) = 1$ (this is called additive noise). When you see how it is done for this case, you will extend the same approach to the case of the QED model with a quartic potential $V(x)$ and multiplicative noise $g(x) = x$.
+
+Here is how it goes when $g(x) = 1$. In this case, the probability current takes the following form:
+
+$$J = - \frac{\partial V}{\partial x} P(x,t) - \frac{\sigma^2}{2} \frac{\partial P(x,t)}{\partial x} = - \frac{\sigma^2}{2} e^{ - \frac{2}{\sigma^2} V}\frac{\partial}{\partial x} \left(  e^{  \frac{2}{\sigma^2} V} P(x,t) \right) \; \; \; (8)$$
+
+In equilibrium with a stationary distribution $P_0(x)$, the left hand side of the FPE vanishes. The right hand side  trivially vanishes as well, if the probability current is zero. This can be achieved if the product $e^{ \frac{2}{\sigma^2} V} P_0(x)$ is independent of $x$. This immediately produces the equilibrium density:
+
+$$P_0(x) = \text{const} \, e^{ - \frac{2}{\sigma^2} V(x)} \; \; \; (9)$$
+
+where a constant factor can be found from the normalization condition. Note that this has the form of the exponential (Boltzmann) distribution.
+
+Now, your problem is to generalize this derivation to the multiplicative noise case with $g(x) = x$ in Eq.(7) and the QED potential 
+
+$V(x) = - \frac{1}{2} \theta x^2 + \frac{1}{3} \kappa x^3 + \frac{1}{4} g x^4$. In this case, the equilibrium density, instead of Eq.(9), is given by the equation $P_0(x) = \frac{1}{Z} e^{ - \frac{2}{\sigma^2} V_{eff}(x)} , \; \; \; Z = \int e^{ - \frac{2}{\sigma^2} V_{eff}(x)} dx$
+
+Here $V_{eff}(x)$ stands for an 'effective' potential that depends on the classical potential $V(x)$ and a correction term that depends on the function $g(x)$, and $Z$ is a normalization constant. For our case with $g(x) = x$ and the QED potential $V(x)$, you obtain one of the formulas given below. 
+
+You can verify that for a general function $g(x)$ and drift $f(x) = - \partial V(x) / \partial x \equiv - V'(x)$, the effective potential is given by the formula $V_{eff}(x) = \int_{0}^{x} \frac{V'(y) }{ g^2(y)} dy +  \sigma^2 \log g(x)$. its minima are in general different from the minima of the classical potential $V(x)$.
+
+Select the correct answer.
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $V_{eff}(x) = \kappa x  + \frac{g}{2} x^2  + \left(\theta - \sigma^2  \right) \log x$
+
+- $V_{eff}(x) = \kappa x  + \frac{g}{2} x^2$
+
+- $V_{eff}(x) = \kappa x  + \frac{g}{2} x^2 - \left(\theta - \sigma^2 \right) \log x$
+
+<br><br>
+
+## 3. 質問 3 (Metastability in the Fokker-Planck equation)
+
+The equilibrium distribution that you calculated in the previous problem exists only if it is normalizable, i.e. the normalization constant $Z$ in Eq.(10) is finite. However, for certain values of parameter $\theta$, the boundary at $x = 0$ can become attracting, resulting in a diverging value of $Z$. This produces metastability in the Fokker-Planck dynamics.
+
+Compute the critical value $\theta_{\star}$ such that for $\theta < \theta_{\star}$, the equilibrium distribution (10) does not exist anymore. (Hint: you have to compute the normalization constant $Z$ in Eq.(10). You can set $g = 0$ in this calculation, as the divergence of the integral is independent of this parameter, and check the values of parameters for which the integral diverges). Select all correct answers:
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $\theta_{\star} = 0$
+
+- $\theta_{\star}  = - \frac{\sigma^2}{2}$
+
+- $\theta_{\star}  =  \frac{\sigma^2}{2}$
+
+<br><br>
+
+## 4. 質問 4 (Fokker-Planck in the log-space)
+
+Consider the Langevin equation for the QED model (without signals, so we set ${\bf w} = 0$):
+
+$$d X_t =\kappa  X_t \left( \frac{\theta}{\kappa}  -  X_t - \frac{g}{\kappa} X_t^2  \right) dt +  \sigma   X_t  d W_t \; \; \; (11)$$
+
+Use Ito's lemma to obtain an equivalent Langevin dynamics for the log-price $y_t = \log X_t$:
+
+$$d y_t = - V'(y) dt + \sigma d W_t, \; \; \; V(y) \equiv - \left( \theta - \frac{\sigma^2}{2} \right) y + \kappa e^{y} + \frac{1}{2} g e^{2y} \; \; \; (12)$$
+
+This equation has an additive noise, unlike the original FPE (11). The origin $x = 0$ is now mapped into a negative infinity in the log-space. Use the results of the previous problem to calculate the equilibrium distribution and the effective potential $V_{eff}(y)$ for the $y$-space. 
+
+Can you say why this expression is not the same as the effective potential from the previous problem re-expressed in terms of log-variable $y = \log x$?
+
+Select all correct answers.
+
+<span style='color:#3C5C; background-color:#011A27;'>10点</span>
+
+- $V_{eff}(y) =    -  \left( \theta - \frac{\sigma^2}{2} \right) y + \kappa e^{y} + \frac{1}{2} g e^{2y}$
+
+- $V_{eff}(y) = - \theta  y + \kappa e^{y} + \frac{1}{2} g e^{2y}$
+
+- $V_{eff}(y)  = - \left( \theta + \frac{\sigma^2}{2} \right) y + \kappa e^{y} + \frac{1}{2} g e^{2y}$
+
+<br><br>
+
+## 5. 質問 5 (Fokker-Planck and Schrödinger equation)
+
+Consider the Fokker-Planck equation in the log-space
+
+$$\frac{\partial P(y,t)}{\partial t} = \frac{\partial}{\partial y} \left[ \frac{\partial V}{\partial y} P(y,t) \right]+ \frac{\sigma^2}{2}  \frac{\partial^2}{\partial y^2}P(y,t) \; \; \; (13)$$
+
+Now if we make here the substitution
+
+$$P(y,t) = \exp\left( - \frac{V(y) - V(y_0) }{\sigma^2} \right) \Psi(y,t) \; \; \; (14)$$
+
+we can transform Eq.(13) into an equation called the imaginary time Schrödinger equation:
+
+$$- \sigma^2 \frac{\partial}{\partial t} \Psi(y,t) = \mathcal{H}_{FP} \Psi(y,t) \; \; \; (15)$$
+
+where $\sigma^2$ plays the role of the Planck constant $\hbar$, and  $\mathcal{H}_{FP}$ is a differential operator called the Fokker-Planck Hamiltonian. 
+
+The imaginary time Schrödinger equation (also called the Euclidean  Schrödinger equation) can be obtained from the regular Schrödinger equation of quantum mechanics by changing time to imaginary time t \rightarrow - i t t→−it. The formal equivalence between the FPE and the Schrödinger equation (and hence the Euclidean quantum mechanics) is very useful, as it enables using a number of computational methods developed for quantum mechanics for solving problems of classical stochastic dynamics.
+
+Compute this operator, and select the correct answer from the below.
+
+10点
+
+  \mathcal{H}_{FP} =  \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2  H 
+FP
+​
+ = 
+2
+σ 
+4
+ 
+​
+  
+∂y 
+2
+ 
+∂ 
+2
+ 
+​
+ + 
+2
+1
+​
+ ( 
+∂y
+∂V
+​
+ ) 
+2
+ 
+
+
+ \mathcal{H}_{FP} =  - \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2+ \frac{\sigma^2}{2} \frac{\partial^2 V}{\partial y^2}  H 
+FP
+​
+ =− 
+2
+σ 
+4
+ 
+​
+  
+∂y 
+2
+ 
+∂ 
+2
+ 
+​
+ + 
+2
+1
+​
+ ( 
+∂y
+∂V
+​
+ ) 
+2
+ + 
+2
+σ 
+2
+ 
+​
+  
+∂y 
+2
+ 
+∂ 
+2
+ V
+​
+ 
+
+
+  \mathcal{H}_{FP} =  - \frac{\sigma^4}{2} \frac{\partial^2}{\partial y^2} +  \frac{1}{2}\left( \frac{\partial V}{\partial y} \right)^2- \frac{\sigma^2}{2} \frac{\partial^2 V}{\partial y^2}  H 
+FP
+​
+ =− 
+2
+σ 
+4
+ 
+​
+  
+∂y 
+2
+ 
+∂ 
+2
+ 
+​
+ + 
+2
+1
+​
+ ( 
+∂y
+∂V
+​
+ ) 
+2
+ − 
+2
+σ 
+2
+ 
+​
+  
+∂y 
+2
+ 
+∂ 
+2
+ V
+​
+ 
+
+6.
+質問 6
+Fokker-Plank, Schrödinger and supersymmetry
+
+The FP Hamiltonian that you computed in the previous problem has a remarkable property of being a factorizable operator: it can be represented as a product of two first-order operators  A^{+} A 
++
+  and  A A:
+
+\mathcal{H}_{FP} =   A^{+} AH 
+FP
+​
+ =A 
++
+ A   (16)
+
+Find the form of operators  A^{+} A 
++
+  and  A A. 
+
+Once we have operators  A  A and  A^{+} A 
++
+  we can switch their order to obtain the partner Hamiltonian   \mathcal{H}_{FP}^{+} H 
+FP
++
+​
+ :
+
+\mathcal{H}_{FP}^{+} =  A A^{+}H 
+FP
++
+​
+ =AA 
++
+   (17)
+
+The    \mathcal{H}_{FP}^{+} H 
+FP
++
+​
+  is called the backward FP Hamiltonian, because it corresponds to the {\it backward} FP (Kolmogorov) equation.
+
+The pair of Hamiltonians    \mathcal{H}_{FP} H 
+FP
+​
+  and   \mathcal{H}_{FP}^{+} H 
+FP
++
+​
+  are {\it iso-spectral}: their eigenvalues are all non-negative and degenerate, except possibly for an eigenstate with the zero eigenvalue, which may be non-degenerate. 
+
+The degeneracy of spectra of Hamiltonians    \mathcal{H}_{FP} H 
+FP
+​
+  and   \mathcal{H}_{FP}^{+} H 
+FP
++
+​
+  can be seen as follows. 
+
+If  \Psi_n Ψ 
+n
+​
+  is an eigenvector of  \mathcal{H}_{FP} H 
+FP
+​
+  with an eigenvalue  E_n E 
+n
+​
+ , than the state  A  \Psi_n AΨ 
+n
+​
+  will be an eigenstate of the partner Hamiltonian  H_{FP}^{+} H 
+FP
++
+​
+  with the same eigenvalue (energy)  E_n E 
+n
+​
+ . This is seen from the following transformation
+
+\mathcal{H}_{FP}^{+}  A  \Psi_n = A A^{+} A   \Psi_n  = A \mathcal{H}_{FP}  \Psi_n = A E_n \Psi_n = E_n A \Psi_nH 
+FP
++
+​
+ AΨ 
+n
+​
+ =AA 
++
+ AΨ 
+n
+​
+ =AH 
+FP
+​
+ Ψ 
+n
+​
+ =AE 
+n
+​
+ Ψ 
+n
+​
+ =E 
+n
+​
+ AΨ 
+n
+​
+    (18)
+
+which means that all eigenstates of  spectra of  H_{FP} H 
+FP
+​
+  except a lowest eigenstate  with eigenvalue zero 'vacuum' state with energy should be degenerate in energy with eigenstates of the partner Hamiltonian  H_{FP}^{+} H 
+FP
++
+​
+ . This is a manifestation of a hidden symmetry of stochastic differential equation  (and having a counterpart in quantum mechanics and quantum field theory) called supersymmetry (SUSY). SUSY is very helpful for many computational problems, as sometimes quantities that are hard to compute with the original Hamiltonian   H_{FP} H 
+FP
+​
+  can be more easily computed using the SUSY partner Hamiltonian 
+
+ H_{FP}^{+} H 
+FP
++
+​
+ , and then mapped back onto the original problem using SUSY transformations.
+
+For more details on supersymmetry in quantum mechanics, see e.g. the book by S. Weinberg, Classical Solutions in Quantum Field Theory: Solitons and Instantons in High Energy Physics, Cambridge University Press  (2012).
+
+Select the correct answers from the answers below. 
+
+10点
+
+ A = \frac{1}{\sqrt{2}} \left[\frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ - \frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right]  A= 
+2
+​
+ 
+1
+​
+ [ 
+∂y
+∂
+​
+ + 
+∂y
+∂V
+​
+ ],A 
++
+ = 
+2
+​
+ 
+1
+​
+ [− 
+∂y
+∂
+​
+ + 
+∂y
+∂V
+​
+ ]
+
+
+ A = \frac{1}{\sqrt{2}} \left[  \frac{1}{\sigma}  \frac{\partial}{\partial y} + \sigma \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ -  \frac{1}{\sigma} \frac{\partial}{\partial y} + \sigma  \frac{\partial V}{\partial y} \right]  A= 
+2
+​
+ 
+1
+​
+ [ 
+σ
+1
+​
+  
+∂y
+∂
+​
+ +σ 
+∂y
+∂V
+​
+ ],A 
++
+ = 
+2
+​
+ 
+1
+​
+ [− 
+σ
+1
+​
+  
+∂y
+∂
+​
+ +σ 
+∂y
+∂V
+​
+ ]
+
+
+ A = \frac{1}{\sqrt{2}} \left[ \sigma^2 \frac{\partial}{\partial y} +  \frac{\partial V}{\partial y} \right] , \; \; \;A^{+} = \frac{1}{\sqrt{2}} \left[ - \sigma^2 \frac{\partial}{\partial y} + \frac{\partial V}{\partial y} \right]  A= 
+2
+​
+ 
+1
+​
+ [σ 
+2
+  
+∂y
+∂
+​
+ + 
+∂y
+∂V
+​
+ ],A 
++
+ = 
+2
+​
+ 
+1
+​
+ [−σ 
+2
+  
+∂y
+∂
+​
+ + 
+∂y
+∂V
+​
+ ]
+
+# Appendix
+
+## Blooper
+
+## Documenting File Creation 
+
+It's useful to record some information about how your file was created.
+
+- File creation date: 2021-05-03
+- File latest updated date: `r today('Asia/Tokyo')`
+- `r R.version.string`
+- [**rmarkdown** package](https://github.com/rstudio/rmarkdown) version: `r packageVersion('rmarkdown')`
+- File version: 1.0.0
+- Author Profile: [®γσ, Eng Lian Hu](https://github.com/scibrokes/owner)
+- GitHub: [Source Code](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance)
+- Additional session information:
+
+```{r info, warning = FALSE, results = 'asis'}
+suppressMessages(require('dplyr', quietly = TRUE))
+suppressMessages(require('magrittr', quietly = TRUE))
+suppressMessages(require('formattable', quietly = TRUE))
+suppressMessages(require('knitr', quietly = TRUE))
+suppressMessages(require('kableExtra', quietly = TRUE))
+
+sys1 <- devtools::session_info()$platform %>% 
+  unlist %>% data.frame(Category = names(.), session_info = .)
+rownames(sys1) <- NULL
+
+sys2 <- data.frame(Sys.info()) %>% 
+  dplyr::mutate(Category = rownames(.)) %>% .[2:1]
+names(sys2)[2] <- c('Sys.info')
+rownames(sys2) <- NULL
+
+if (nrow(sys1) == 9 & nrow(sys2) == 8) {
+  sys2 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  Sys.info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+} else {
+  sys1 %<>% rbind(., data.frame(
+  Category = 'Current time', 
+  session_info = paste(as.character(lubridate::now('Asia/Tokyo')), 'JST🗾')))
+}
+
+sys <- cbind(sys1, sys2) %>% 
+  kbl(caption = 'Additional session information:') %>% 
+  kable_styling(bootstrap_options = c('striped', 'hover', 'condensed', 'responsive')) %>% 
+  row_spec(0, background = 'DimGrey', color = 'yellow') %>% 
+  column_spec(1, background = 'CornflowerBlue', color = 'red') %>% 
+  column_spec(2, background = 'grey', color = 'black') %>% 
+  column_spec(3, background = 'CornflowerBlue', color = 'blue') %>% 
+  column_spec(4, background = 'grey', color = 'white') %>% 
+  row_spec(9, bold = T, color = 'yellow', background = '#D7261E')
+
+rm(sys1, sys2)
+sys
+```
+
+## Reference
+
+<br>
+
+---
+
+<br>
