@@ -71,7 +71,7 @@ Select the correct one:
  
 - $dy_t = \left(\mu - \frac{\sigma^2}{2} \right) dt + \sigma d W_t$
 
-- $dy_t = \left( \mu + \frac{\sigma^2}{2} \right) dt + \sigma d W_t$
+- ${\color{Green}dy_t = \left( \mu + \frac{\sigma^2}{2} \right) dt + \sigma d W_t}$
 
 <br><br>
 
@@ -138,8 +138,8 @@ Select the correct answer:
 
 - The model is wrong, because infinities should not occur in a consistent model.
 
-- The apparent singularity of the drift is cancelled
-by the fact that for small values of $\tau$, $y_t ∼ \tau^{3/2} \to 0$.  As $y_t = log S_t/K$, this means that the stock price is 'pinned' at the option strike $K$ close to the option maturity when $\tau \to 0$.
+- <span style='color:Green;'>The apparent singularity of the drift is cancelled
+by the fact that for small values of $\tau$, $y_t ∼ \tau^{3/2} \to 0$.  As $y_t = log S_t/K$, this means that the stock price is 'pinned' at the option strike $K$ close to the option maturity when $\tau \to 0$.</span>
 
 <br><br>
 
@@ -202,7 +202,7 @@ Select the correct answer.
 
 Instead of non-parametric specifications of an optimal action as computed in Problem 4, we can develop a parametric model of optimal action. To this end, assume we have a set of basic functions $\psi_k(S)$ with $k = 1,\ldots, K$. Here $K$ is the total number of basis function - the same as the dimension of your model space.
 
-We now define the optimal action $u_t = u_t(S_t)$ in terms of coefficients $\theta_k$ of expansion over  such state of basis functions $\Psi_k$ (for example, we could use spline basis functions, Fourier bases etc.) (10):  $u_t = u_t(S_t) = \sum_{k=1}^{K} \theta_{k}(t)  \Psi_{k}(S_t)$
+We now define the optimal action $u_t = u_t(S_t)$ in terms of coefficients $\theta_k$ of expansion over  such state of basis functions $\Psi_k$ (for example, we could use spline basis functions, Fourier bases etc.) (10):  $u_t = u_t(S_t) = \sum_{k=1}^{K} \theta_{k}(t) \Psi_{k}(S_t)$
 
 Compute the optimal coefficients $\theta_k(t)$ by substituting Eq.(10) into Eq.(9) and maximizing it with respect to a set of weights $\theta_k(t)$ for a $t-t_h$ time step.
 
@@ -214,7 +214,7 @@ Select the correct answer:
 
 - $\vec{\theta} = \frac{1}{2 \lambda} {\bf B}^T {\bf A }^{-1}$
 - $\vec{\theta} = \frac{1}{2 \lambda} {\bf B}^{-1} {\bf A}^{-1}$
-- $\vec{\theta} = \frac{1}{2 \lambda} {\bf A}^{-1} {\bf B}$
+- ${\color{Green}\vec{\theta} = \frac{1}{2 \lambda} {\bf A}^{-1} {\bf B}}$
 
 <br><br>
 

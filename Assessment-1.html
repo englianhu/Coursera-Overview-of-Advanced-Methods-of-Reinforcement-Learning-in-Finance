@@ -281,7 +281,7 @@ div.tocify {
 <h2 number="2.1"><span class="header-section-number">2.1</span> 1. 質問 1 (Problem 1: Ito calculus)</h2>
 <p>This is a warm-up problem to refresh your stochastic calculus (if you already know it), or to have crash course on it, if you don’t. While it is not possible here to explain in details why Ito calculus works the way it works, you will see how to use it for practical purposes.</p>
 <p>Let’s assume the stock price satisfies the following stochastic differential equation (SDE):</p>
-<p><span class="math display">\[dS_t = \mu S_tdt + \sigma S_t d W_t \; \; \;  (1)\]</span></p>
+<p><span class="math display">\[dS_t = \mu S_tdt + \sigma S_t d W_t \; \; \; (1)\]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> stand for the drift and volatility (both can be functions of <span class="math inline">\(S_t\)</span>), while Wt is a Brownian motion. If both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are constant parameters, Eq.(1) describes the Geometric Brownian Motion (GBM) model.</p>
 <p>The key property of the Brownian motion is <span class="math inline">\(\langle \left( dW_t \right)^2 \rangle = dt\)</span>. In words, the mean value of the squared displacement of the Brownian motion is equal to the time step <span class="math inline">\(dt\)</span>. This is clearly very different from a regular smooth (differentiable) time-dependent variable <span class="math inline">\(X_t\)</span> for which we would have <span class="math inline">\((dX_t)^2 ∼ (dt)^2\)</span>. The reason we have <span class="math inline">\((dW_t)^2= dt\)</span> is that a Brownian motion Wt is nowhere differentiable, and the ‘differential’ <span class="math inline">\(dW_t\)</span> is not a conventional differential from calculus.</p>
 <p>Special rules are needed to define derivatives and integrals of functions of a Brownian motion.</p>
@@ -297,7 +297,7 @@ div.tocify {
 <ul>
 <li><p><span class="math inline">\(dy_t = - \left( \mu - \frac{\sigma^2}{2} \right) dt + \sigma d W_t\)</span></p></li>
 <li><p><span class="math inline">\(dy_t = \left(\mu - \frac{\sigma^2}{2} \right) dt + \sigma d W_t\)</span></p></li>
-<li><p><span class="math inline">\(dy_t = \left( \mu + \frac{\sigma^2}{2} \right) dt + \sigma d W_t\)</span></p></li>
+<li><p><span class="math inline">\({\color{Green}dy_t = \left( \mu + \frac{\sigma^2}{2} \right) dt + \sigma d W_t}\)</span></p></li>
 </ul>
 <p><br><br></p>
 </div>
@@ -343,7 +343,7 @@ div.tocify {
 <ul>
 <li><p>The model is not wrong, but is only applicable for long times to maturity <span class="math inline">\(\tau &gt; y_t/a\)</span>.</p></li>
 <li><p>The model is wrong, because infinities should not occur in a consistent model.</p></li>
-<li><p>The apparent singularity of the drift is cancelled by the fact that for small values of <span class="math inline">\(\tau\)</span>, <span class="math inline">\(y_t ∼ \tau^{3/2} \to 0\)</span>. As <span class="math inline">\(y_t = log S_t/K\)</span>, this means that the stock price is ‘pinned’ at the option strike <span class="math inline">\(K\)</span> close to the option maturity when <span class="math inline">\(\tau \to 0\)</span>.</p></li>
+<li><p><span style="color:Green;">The apparent singularity of the drift is cancelled by the fact that for small values of <span class="math inline">\(\tau\)</span>, <span class="math inline">\(y_t ∼ \tau^{3/2} \to 0\)</span>. As <span class="math inline">\(y_t = log S_t/K\)</span>, this means that the stock price is ‘pinned’ at the option strike <span class="math inline">\(K\)</span> close to the option maturity when <span class="math inline">\(\tau \to 0\)</span>.</span></p></li>
 </ul>
 <p><br><br></p>
 </div>
@@ -391,7 +391,7 @@ div.tocify {
 <ul>
 <li><span class="math inline">\(\vec{\theta} = \frac{1}{2 \lambda} {\bf B}^T {\bf A }^{-1}\)</span></li>
 <li><span class="math inline">\(\vec{\theta} = \frac{1}{2 \lambda} {\bf B}^{-1} {\bf A}^{-1}\)</span></li>
-<li><span class="math inline">\(\vec{\theta} = \frac{1}{2 \lambda} {\bf A}^{-1} {\bf B}\)</span></li>
+<li><span class="math inline">\({\color{Green}\vec{\theta} = \frac{1}{2 \lambda} {\bf A}^{-1} {\bf B}}\)</span></li>
 </ul>
 <p><br><br></p>
 </div>
@@ -595,7 +595,7 @@ date
 Current time
 </td>
 <td style="text-align:left;color: white !important;background-color: grey !important;font-weight: bold;color: yellow !important;background-color: #D7261E !important;">
-2021-05-03 05:08:31 JST🗾
+2021-05-03 22:34:53 JST🗾
 </td>
 </tr>
 </tbody>

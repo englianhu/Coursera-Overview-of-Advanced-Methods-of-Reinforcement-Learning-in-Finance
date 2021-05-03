@@ -51,8 +51,7 @@ Select all correct answers:
 
 <span style='color:#3C5C; background-color:#011A27;'>10点</span>
 
-- Eq.(2) is a simple ordinary differential equation (ODE). To solve it, I divide both sides of Eq.(2) by $X_t$, then take integrals on both sides of the resulting equation. Then I take into account the initial condition to fix the arbitrary constant of integration.
-
+- <span style='color:Green;'>Eq.(2) is a simple ordinary differential equation (ODE). To solve it, I divide both sides of Eq.(2) by $X_t$, then take integrals on both sides of the resulting equation. Then I take into account the initial condition to fix the arbitrary constant of integration.</span>
 - I google it.
 
 - I differentiate Eq.(1) with respect to time.
@@ -103,7 +102,7 @@ Find the expressions for the dimensionless variable $u_t$ and parameter a in ter
 
 - $u_t = \frac{\kappa \Delta t}{1+ \theta \Delta t} X_t$ and $\alpha = \kappa \Delta t$
 
-- $u_t = \frac{\kappa \Delta t}{1+ \theta \Delta t}$ and $\alpha = 1 + \theta \Delta t$
+- <span style='color:Green;'>$u_t = \frac{\kappa \Delta t}{1+ \theta \Delta t}$ and $\alpha = 1 + \theta \Delta t$</span>
 
 <br><br>
 
@@ -119,7 +118,7 @@ assuming that $0 ≤ u_t ≤ 1$. Select all correct answers:
 
 - $u_{\star} = 1$
 - $u_{\star} = 0$    
-- $u_{\star} = 0$ and $u_{\star} = 1 - \frac{1}{\alpha}$
+- <span style='color:Green;'>$u_{\star} = 0$ and $u_{\star} = 1 - \frac{1}{\alpha}$</span>
 
 <br><br>
 
@@ -139,7 +138,7 @@ correct answers:
 
 <span style='color:#3C5C; background-color:#011A27;'>10点</span>
 
-- $u_{\star} = 0$ is unstable and $u_{\star} = 1 - \frac{1}{\alpha}$ is unstable.
+- <span style='color:Green;'>$u_{\star} = 0$ is unstable and $u_{\star} = 1 - \frac{1}{\alpha}$ is unstable.</span>
 
 - $u_{\star} = 0$ is stable, and $u_{\star} = 1$ is stable.
 
@@ -157,124 +156,24 @@ When the value of parameter $\alpha$ in the logistic map equation
 
 $$u_{t+1} = \alpha u_{t} \left( 1 - u_t \right) \; \; \; (8)$$
 
-gradually increases, it leads to progressively more complex behavior for values above $\alpha = 3$. This happens because for $\alpha > 3$, both fixed points $x_{\star} = 0$ and $x_{\star} = 1 - \frac{1}{\alpha}$ become repellent. In this case, trajectories that initially start at nearly identical values progressively diverge as the iteration increases. Such behavior is called chaotic. This happens if aa exceeds some critical value $\alpha_{\infty} \simeq 3.56$. For values $3 < \alpha \leq \alpha_{\infty}$, there is a regime of bifurcations. More specifically, there is a sequence of values $\left\{ \alpha_n \right\}$ for $n = 1, 2, \ldots$ such that for all values of $\alpha$ such that $\alpha_{n-1} < \alpha < \alpha_{n}$, a limiting behavior is described by a stable cycle with  $2^{\alpha-1}$ elements $x_0^{\star}, x_{1}^{\star}, x_{2^{n-1}-1}$. In this regime, a system iterates between these points in after entering a stable regime starting from an arbitrary initial value. When $\alpha = \alpha_{n}$, a period bifurcation happens, and there is a new stable cycle of length  2^{n} 2 
-n
-  for all values   a_{n} < a < a_{n+1} a 
-n
-​
- <a<a 
-n+1
-​
- ,  etc.   This means that as aa passes the value  a_{n} a 
-n
-​
- , two more points of a periodic orbit emerge, while the previously stable  2^{n-1} 2 
-n−1
-  points become unstable and re-adjust their positions to become stable again.
+gradually increases, it leads to progressively more complex behavior for values above $\alpha = 3$. This happens because for $\alpha > 3$, both fixed points $x_{\star} = 0$ and $x_{\star} = 1 - \frac{1}{\alpha}$ become repellent. In this case, trajectories that initially start at nearly identical values progressively diverge as the iteration increases. Such behavior is called chaotic. This happens if aa exceeds some critical value $\alpha_{\infty} \simeq 3.56$. For values $3 < \alpha \leq \alpha_{\infty}$, there is a regime of bifurcations. More specifically, there is a sequence of values $\left\{ \alpha_n \right\}$ for $n = 1, 2, \ldots$ such that for all values of $\alpha$ such that $\alpha_{n-1} < \alpha < \alpha_{n}$, a limiting behavior is described by a stable cycle with  $2^{\alpha-1}$ elements $x_0^{\star}, x_{1}^{\star}, x_{2^{n-1}-1}$. In this regime, a system iterates between these points in after entering a stable regime starting from an arbitrary initial value. When $\alpha = \alpha_{n}$, a period bifurcation happens, and there is a new stable cycle of length $2^n$ for all values $a_n < a < a_{n+1}$, etc. This means that as $\alpha$ passes the value $a_n$, two more points of a periodic orbit emerge, while the previously stable $2^{n-1}$ points become unstable and re-adjust their positions to become stable again.
 
- It turns out that elements of a stable cycle can be calculated by computing fixed points of (even) iterated powers of the map, such as T(2)≡f(2)(x)=f(f(x))$,$T(4)=T(2)(T(2)), and so on. Now compute the fixed points of the second iterated operator   T^{(2)} \equiv f^{(2)}(x) = f \left(f (x) \right) T 
-(2)
- ≡f 
-(2)
- (x)=f(f(x)). 
+It turns out that elements of a stable cycle can be calculated by computing fixed points of (even) iterated powers of the map, such as $T(2)≡f(2)(x)=f(f(x))$,$T(4)=T(2)(T(2))$, and so on. Now compute the fixed points of the second iterated operator $T^{(2)} \equiv f^{(2)}(x) = f \left(f (x) \right)$. 
 
-(Hint: The fixed points equation   f \left( f (x) \right) - x = 0 f(f(x))−x=0 is a quartic equation. Two of his roots are the stable points of the original map  f (x) x = 0 f(x)x=0 and  x = 1 - 1/a x=1−1/a. Therefore, the fixed point equation should have the form of  x ( x - 1 + 1/a) x(x−1+1/a) times a second-order polynomial. Lets denote this polynomial as  p(x) = a x^2 + b x + c p(x)=ax 
-2
- +bx+c where  a, b, c a,b,c are coefficients that you can find by substituting this polynomial and the factor  x ( x - 1 + 1/a) x(x−1+1/a) into the original quartic fixed point equation   f \left( f (x) \right) - x = 0 f(f(x))−x=0, and comparing coefficients in front of different powers of xx in both expressions. Once you found coefficients  a, b, c a,b,c, the remaining two stable points  x_{1,2} x 
-1,2
-​
-  are computed as roots of this quadratic equation.)
+(Hint: The fixed points equation $f \left(f(x) \right) - x = 0$ is a quartic equation. Two of his roots are the stable points of the original map $f(x)x = 0$ and $x = 1 -\frac{1}{a}$. Therefore, the fixed point equation should have the form of $x(x - 1 +\frac{1}{a})$ times a second-order polynomial. Lets denote this polynomial as $p(x) =\alpha x^2 + bx + c$ where $a, b, c$ are coefficients that you can find by substituting this polynomial and the factor $x(x - 1 +\frac{1}{a})$ into the original quartic fixed point equation $f\left(f(x) \right) - x = 0$, and comparing coefficients in front of different powers of $x$ in both expressions. Once you found coefficients $a, b, c$ the remaining two stable points $x_{1,2}$ are computed as roots of this quadratic equation.)
 
-You can check that the derivative of  f^{(2)} f 
-(2)
-  at these points are given by the expression  - a^2 + 2 a + 4 −a 
-2
- +2a+4. This quantity decreases as  a a increases, until it reaches the value of  -1 −1 when  a = 1 + \sqrt{6} a=1+ 
-6
-​
- . At this value of  a a, points  x_{1,2} x 
-1,2
-​
-  become unstaible. The point  a = a_1 = 1 + \sqrt{6} \simeq 3.449 a=a 
-1
-​
- =1+ 
-6
-​
- ≃3.449 is a point of a period doubling bifurcation. For values  a > a_1 a>a 
-1
-​
- , points of period four would be stable, until  a a reaches the value  a_2 = 3.54409 a 
-2
-​
- =3.54409 when period eight points become stable, and so on. For some critical value  a_{\infty} \simeq 3.57 a 
-∞
-​
- ≃3.57, the period diverges. For the interval  a_{\infty} < a \leq 4 a 
-∞
-​
- <a≤4, the logistic map exhibits a chaotic behavior when trajectories that are arbitrarily close initially become exponentially diverging from one another with time (The speed of their divergence is called the Lyapunov exponent.).
+You can check that the derivative of $f^{(2)}$ at these points are given by the expression $-\alpha^2 + 2\alpha + 4$. This quantity decreases as $\alpha$ increases, until it reaches the value of $-1$ when $\alpha = 1 + \sqrt{6}$. At this value of $\alpha$, points  $x_{1,2}$ become unstable. The point $\alpha = \alpha_1 = 1 + \sqrt{6} \simeq 3.449$ is a point of a period doubling bifurcation. For values $\alpha > \alpha_1$, points of period four would be stable, until $\alpha$ reaches the value $\alpha_2 = 3.54409$ when period eight points become stable, and so on. For some critical value $\alpha_{\infty} \simeq 3.57$, the period diverges. For the interval $\alpha_{\infty} < \alpha \leq 4$, the logistic map exhibits a chaotic behavior when trajectories that are arbitrarily close initially become exponentially diverging from one another with time (The speed of their divergence is called the Lyapunov exponent.).
 
-The most remarkable property of chaotic behavior is its universality. It turns out that chaotic dynamics arise for an arbitrary non-linear map  f(x) f(x) as long as, after rescaling the variable  x x to a unit interval  [0,1] [0,1], the function  f(x) f(x) has only one maximum and no other extrema on this interval (see e.g. H. Schuster, {\it Deterministic Chaos: an Introduction}, Physik-Verlag, Weinheim 1984). 
-
+The most remarkable property of chaotic behavior is its universality. It turns out that chaotic dynamics arise for an arbitrary non-linear map $f(x)$ as long as, after rescaling the variable $x$ to a unit interval $[0,1]$, the function $f(x)$ has only one maximum and no other extrema on this interval (see e.g. H. Schuster, {*It Deterministic Chaos: an Introduction}, Physik-Verlag, Weinheim 1984*). 
 Select all correct answers:
 
 <span style='color:#3C5C; background-color:#011A27;'>10点</span>
 
-  x_{1,2} =   \frac{1}{2} + \frac{1}{2a}  \pm  \frac{1}{2 a} \sqrt{(a+1)(a-3)}x 
-1,2
-​
- = 
-2
-1
-​
- + 
-2a
-1
-​
- ± 
-2a
-1
-​
-  
-(a+1)(a−3)
-​
- .
+- ${\color{Green}x_{1,2} = \frac{1}{2} + \frac{1}{2 \alpha} \pm  \frac{1}{2 \alpha} \sqrt{(\alpha + 1)(\alpha - 3)}}$
 
+- $x_{1,2} =  - \frac{1}{2} - \frac{1}{2 \alpha}  \pm  \frac{1}{2 \alpha} \sqrt{(\alpha + 1)(\alpha - 3)}$
 
- x_{1,2} =  - \frac{1}{2} - \frac{1}{2a}  \pm  \frac{1}{2 a} \sqrt{(a+1)(a-3)} x 
-1,2
-​
- =− 
-2
-1
-​
- − 
-2a
-1
-​
- ± 
-2a
-1
-​
-  
-(a+1)(a−3)
-​
- .
-
-
- x_{1,2} =  - \frac{1}{2} \pm \frac{1}{2a}  x 
-1,2
-​
- =− 
-2
-1
-​
- ± 
-2a
-1
-​
- .
+- $x_{1,2} = - \frac{1}{2} \pm \frac{1}{2 \alpha}$
 
 # Appendix
 
