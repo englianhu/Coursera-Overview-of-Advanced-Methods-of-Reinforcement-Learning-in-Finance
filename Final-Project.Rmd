@@ -54,7 +54,7 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 
 <br><br>
 
-## 自分の提出物
+### 自分の提出物
 
 プロジェクト名 *
 プロジェクトにわかりやすいタイトルを付けてください
@@ -69,7 +69,60 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 
 <br><br>
 
-## ディスカッション
+### ディスカッション
+
+<br><br>
+
+## Answer
+
+### Load Packages
+
+<span style='color:green'>**Load Packages**</span>
+
+```{r setup, warning = FALSE, message = FALSE}
+if(!suppressPackageStartupMessages(require('BBmisc'))) {
+  install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock')
+}
+suppressPackageStartupMessages(require('BBmisc'))
+# suppressPackageStartupMessages(require('rmsfuns'))
+
+pkgs <- c('devtools', 'knitr', 'kableExtra', 'tint', 'furrr', 
+          'readr', 'lubridate', 'data.table', 'reprex', 'tidyr', 
+          'feather', 'purrr', 'quantmod', 'tidyquant', 'dtplyr', 
+          'timetk', 'plyr', 'dplyr', 'stringr', 'magrittr', 
+          'tidyverse', 'memoise', 'htmltools', 'formattable', 
+          'zoo', 'forecast', 'rvest', 'xml2', 
+          'microbenchmark', 'dendextend', 'stringr', 'echarts4r', 
+          'fable', 'fabletools', 'tibbletime', 'tdplyr')
+
+suppressAll(lib(pkgs))
+# load_pkg(pkgs)
+
+## Set the timezone but not change the datetime
+Sys.setenv(TZ = 'Asia/Tokyo')
+## options(knitr.table.format = 'html') will set all kableExtra tables to be 'html', otherwise need to set the parameter on every single table.
+options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
+
+## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+
+rm(pkgs)
+```
+
+### Read Data
+
+```{r read-data, warning = FALSE, message = FALSE}
+if(!file.exists('./data/dja_cap.csv')) {
+  dowload('https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/view/dja_cap.csv', './data/dja_cap.csv')
+  }
+
+dsmp <- read_html('./data/dja_cap.csv')
+
+if(!file.exists('./data/dja_cap.html')) {
+  write_html(dsmp, './data/dja_cap.html')
+  }
+```
 
 <br><br>
 

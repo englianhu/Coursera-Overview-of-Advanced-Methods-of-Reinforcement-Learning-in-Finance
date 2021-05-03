@@ -108,7 +108,7 @@
       
       4.1.9) 動画: 講座 [The Value of Universatility. Duration: 15分](https://www.youtube.com/watch?v=qw36ZxpVQ7s)
       
-    4.2) [Week 4 Assessment]()
+    4.2) Week 4 Assessment
 
       4.2.1) ラボ: [Final Project: Exploration of non-linear market model dynamics. Duration: 1時間]()
       

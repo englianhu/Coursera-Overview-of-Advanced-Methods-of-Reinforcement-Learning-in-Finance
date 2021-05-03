@@ -291,9 +291,8 @@ div.tocify {
 <p>Files for this project are uploaded in the Notebook: <a href="https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb">QED_DJI_calibration_Coursera_course_4.ipynb</a> and <a href="https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/view/dja_cap.csv">dja_cap.csv</a></p>
 <p><br><br></p>
 </div>
-</div>
-<div id="自分の提出物" class="section level2" number="2.2">
-<h2 number="2.2"><span class="header-section-number">2.2</span> 自分の提出物</h2>
+<div id="自分の提出物" class="section level3" number="2.1.2">
+<h3 number="2.1.2"><span class="header-section-number">2.1.2</span> 自分の提出物</h3>
 <p>プロジェクト名 * プロジェクトにわかりやすいタイトルを付けてください</p>
 <ul>
 <li><p><strong>Part 1</strong>: Estimate the model using the DJI portfolio of 30 stocks, first without signals, and then using simple signals such as simple moving averages constructed below (Max 10 point).</p></li>
@@ -303,8 +302,45 @@ div.tocify {
 </ul>
 <p><br><br></p>
 </div>
-<div id="ディスカッション" class="section level2" number="2.3">
-<h2 number="2.3"><span class="header-section-number">2.3</span> ディスカッション</h2>
+<div id="ディスカッション" class="section level3" number="2.1.3">
+<h3 number="2.1.3"><span class="header-section-number">2.1.3</span> ディスカッション</h3>
+<p><br><br></p>
+</div>
+</div>
+<div id="answer" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Answer</h2>
+<p><span style="color:green"><strong>Load Packages</strong></span></p>
+<pre class="r"><code>if(!suppressPackageStartupMessages(require(&#39;BBmisc&#39;))) {
+  install.packages(&#39;BBmisc&#39;, dependencies = TRUE, INSTALL_opts = &#39;--no-lock&#39;)
+}
+suppressPackageStartupMessages(require(&#39;BBmisc&#39;))
+# suppressPackageStartupMessages(require(&#39;rmsfuns&#39;))
+
+pkgs &lt;- c(&#39;devtools&#39;, &#39;knitr&#39;, &#39;kableExtra&#39;, &#39;tint&#39;, &#39;furrr&#39;, 
+          &#39;readr&#39;, &#39;lubridate&#39;, &#39;data.table&#39;, &#39;reprex&#39;, &#39;tidyr&#39;, 
+          &#39;feather&#39;, &#39;purrr&#39;, &#39;quantmod&#39;, &#39;tidyquant&#39;, &#39;dtplyr&#39;, 
+          &#39;timetk&#39;, &#39;plyr&#39;, &#39;dplyr&#39;, &#39;stringr&#39;, &#39;magrittr&#39;, 
+          &#39;tidyverse&#39;, &#39;memoise&#39;, &#39;htmltools&#39;, &#39;formattable&#39;, 
+          &#39;zoo&#39;, &#39;forecast&#39;, &#39;seasonal&#39;, &#39;seasonalview&#39;, &#39;rjson&#39;, 
+          &#39;rugarch&#39;, &#39;rmgarch&#39;, &#39;mfGARCH&#39;, &#39;sparklyr&#39;, &#39;jcolors&#39;, 
+          &#39;microbenchmark&#39;, &#39;dendextend&#39;, &#39;lhmetools&#39;, &#39;ggthemr&#39;, 
+          &#39;stringr&#39;, &#39;pacman&#39;, &#39;profmem&#39;, &#39;ggthemes&#39;, &#39;flyingfox&#39;, 
+          &#39;htmltools&#39;, &#39;echarts4r&#39;, &#39;viridis&#39;, &#39;hrbrthemes&#39;, 
+          &#39;fable&#39;, &#39;fabletools&#39;, &#39;tibbletime&#39;, &#39;tdplyr&#39;, &#39;gtools&#39;)
+
+suppressAll(lib(pkgs))
+# load_pkg(pkgs)
+
+## Set the timezone but not change the datetime
+Sys.setenv(TZ = &#39;Asia/Tokyo&#39;)
+## options(knitr.table.format = &#39;html&#39;) will set all kableExtra tables to be &#39;html&#39;, otherwise need to set the parameter on every single table.
+options(warn = -1, knitr.table.format = &#39;html&#39;)#, digits.secs = 6)
+
+## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+
+rm(pkgs)</code></pre>
 <p><br><br></p>
 </div>
 </div>
@@ -507,7 +543,7 @@ date
 Current time
 </td>
 <td style="text-align:left;color: white !important;background-color: grey !important;font-weight: bold;color: yellow !important;background-color: #D7261E !important;">
-2021-05-04 01:42:52 JST🗾
+2021-05-04 01:53:06 JST🗾
 </td>
 </tr>
 </tbody>
