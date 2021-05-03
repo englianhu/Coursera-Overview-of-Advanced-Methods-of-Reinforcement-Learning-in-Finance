@@ -26,7 +26,7 @@
       
       1.1.4) 動画: 講座 Modeling Feedback Frictions. Duration: 10分
       
-    1.3) Week 1 Assessment  
+    1.3) [Week 1 Assessment](https://rpubs.com/englianhu/Advanced-Reinforcement-Finance-Assessment1)
     
 2) Week 2 : Reinforcement Learning for Optimal Trading and Market Modeling
     
@@ -48,7 +48,7 @@
       
       2.1.8) 動画: 講座 Quantum Equilibrium-Disequilibrium. Duration: 11分
       
-    2.2) Week 2 Assessment  
+    2.2) [Week 2 Assessment](https://rpubs.com/englianhu/764370)
     
 3) Week 3 : Perception - Beyond Reinforcement Learning
     
