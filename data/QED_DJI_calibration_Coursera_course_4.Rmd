@@ -1,0 +1,188 @@
+---
+title: An R Markdown document converted from "./data/QED_DJI_calibration_Coursera_course_4.ipynb"
+output: html_document
+---
+
+## Econometric estimation of an IRL-based market portfolio model. Part II: QED
+
+Welcome to your final course project on Advanced Topic RL in Finance. In this project you will: 
+
+- Explore and estimate an IRL-based model of market returns (the "QED" model) that is obtained by a generalization of   a model that you analyzed in the previous course
+- Respectively, you are expected to re-utilize parts of your previous code from the course project from Course 3: RL (but you can also start from scratch - the template provided here is nearly identical to the one offered to you in course 3)
+- Investige the role of non-linearities in price dynamics
+- Investigate the role and impact of choices of different signals on model estimation and trading strategies
+ 
+
+**Instructions for project structure and grading principles :**
+
+- This is a project that will be graded based on a peer-to-peer review. The project consists of four parts. The maximum score for each part is 10, so that maximum score you can give your peers (and they can give you) is 40. The parts are as follows (more detailed instructions are in specific cells below):
+
+- **Part 1**: Estimate the model using the DJI portfolio of 30 stocks, first without signals, and then using simple signals such as simple moving averages constructed below (Max 10 point).
+
+- **Part 2**: Explore the implications of calibrated model parameters for default probabilities of stocks in your portfolio. Present your conclusions and observations. (Max 10 point).
+
+- **Part 3**: Experiment with other signals and investigate the impact on model calibration obtained with alternative signals. Present your conclusions and observations. (Max 10 points).
+
+- **Part 4** : Show me something else. This part is optional. Come up with your own idea of an interesting analysis.
+For example, you can repeat your analysis for the S&P portfolio.
+Or maybe you can build a strategy using an optimal market-implied policy estimated from this model, and compare it with PCA and absorption ratio strategies that we built in Course 2. Or anything else.  (Max 10 points).
+
+**Instructions for formatting your notebook and packages use can use **
+
+- Use one or more cells of the notebook for each section of the project. Each section is marked by a header cell below. Insert your cells between them without changing the sequence. 
+
+- Think of an optimal presentation of your results and conclusions. Think of how hard or easy it will be for your fellow students to follow your logic and presentation. When you are grading others, you can add or subtract point for the quality of presentation.
+
+- You will be using Python 3 in this project. Using TensorFlow is encouraged but is not strictly necessary, you can use optimization algorithms available in scipy or scikit-learn packages. If you use any non-standard packages, you should state all neccessary additional imports (or instructions how to install any additional modules you use in a top cell of your notebook. If you create a new portfolio for parts 3 and 4 in the project, make your code for creating your dataset replicable as well, so that your grader can reproduce your code locally on his/her machine.   
+
+- Try to write a clean code that can be followed by your peer reviewer. When you are the reviewer, you can add or subtract point for the quality of code. 
+
+
+**After completing this project you will:**
+- Get experience with building and estimation of your second IRL based model of market dynamics.
+- Develop intuition and understanding about the role of non-linearities in dynamics model. 
+- Develop intuition on whether the same model could be calibrated to both equity and credit data.
+- Be able to implement trading strategies based on this method.
+
+Let's get started!
+
+## The "Quantum Equlibrium-Disequlibrium" (QED) IRL-based model of stock returns
+
+In Week 3 lectures of our course we presented the "QED" model
+$$
+d X_t = \kappa X_t  \left( \frac{\theta}{\kappa} - X_t - \frac{g}{\kappa} X_t^2 \right) dt +  X_t \left( {\bf w} {\bf z}_t \, dt + \sigma d W_t \right)
+$$
+
+In this project, you will explore calibration of this model to market data.
+As in the course project for course 3 you analyzed the same model in the limit $ g = 0 $, you would be able to re-utilize parts of your previous code in this project).
+
+```{python}
+import pandas as pd
+import numpy as np
+import tensorflow as tf
+
+import matplotlib.pyplot as plt
+from datetime import datetime
+```
+
+```{python}
+# read the data to a Dataframe
+df_cap = pd.read_csv('dja_cap.csv')
+```
+
+```{python}
+# add dates
+dates = pd.bdate_range(start='2010-01-04', end=None, periods=df_cap.shape[0], freq='B')
+df_cap['date'] = dates
+
+df_cap.set_index('date',inplace=True)
+df_cap.head()
+```
+
+## Let us build some signals 
+
+Here we provide a "warm start" by computing two simple moving average signals that you can use as benchmark in your analysis.
+
+### Generate moving averages
+
+```{python}
+# Calculating the short-window (10 days) simple moving average
+
+window_1 = 10
+
+short_rolling = df_cap.rolling(window=window_1).mean()
+# short_rolling.head(20)
+```
+
+```{python}
+# Calculating the long-window (30 days) simple moving average
+
+window_2 = 30
+long_rolling = df_cap.rolling(window=window_2).mean()
+# long_rolling.tail()
+```
+
+### Plot three years of AAPL stock:
+
+```{python}
+ticker = 'AAPL'
+start_date = '2015-01-01'
+end_date = '2017-12-31'
+
+fig = plt.figure(figsize=(10,6))
+ax = fig.add_subplot(1,1,1)
+
+ax.plot(df_cap.loc[start_date:end_date, :].index, df_cap.loc[start_date:end_date, 'AAPL'], label='Cap')
+ax.plot(long_rolling.loc[start_date:end_date, :].index, long_rolling.loc[start_date:end_date, 'AAPL'], 
+          label = '%d-days SMA' % window_2)
+ax.plot(short_rolling.loc[start_date:end_date, :].index, short_rolling.loc[start_date:end_date, 'AAPL'], 
+         label = '%d-days SMA' % window_1)
+
+ax.legend(loc='best')
+ax.set_ylabel('Cap in $')
+
+plt.show()
+```
+
+## Part 1: Model calibration with or without moving average signals (Max 10 points)
+
+To calibrate the model, it is convenient to use the log-prices instead of prices. Diffusion in the log-space 
+$ y = \log x $ is given by the following Langevin equation:
+
+$$
+d y_t = - \frac{ \partial V(y)}{\partial y} dt + \sigma dW_t , \; \; \;  V(y)  \equiv - \left( \theta - \frac{\sigma^2}{2} + {\bf w} {\bf z}_t \right) y  + \kappa e^y + \frac{1}{2} g e^{2y}
+$$
+
+where $ W_t $ is a standard Brownian motion.
+In terms of variables $ y = \log x $, the negative log-likelihood of data is therefore
+
+$$
+LL_M (\Theta) = - \log \prod_{t=0}^{T-1} 
+\frac{1}{ \sqrt{ 2 \pi  \sigma^2}  } 
+\exp \left\{  - \frac{1}{2 \sigma^2} \left(   \frac{ y_{t+ \Delta t} -   y_{t}}{ \Delta t} +  \frac{ \partial V(y)}{\partial y}   
+\right)^2
+\right\} , 
+$$ 
+
+where $ {\bf y}_t  = \log x_t $  now stands for observed values of log-cap. Note that because the model is Markov, the product over $ t = 0, \ldots, T-1 $ does not 
+necessarily mean a product of transitions along the same trajectory. The negative log-likelihood should be minimized to estimate parameters $ 
+\theta $, $ \sigma $, $ \kappa $, $ g $ and  $ {\bf w} $. You can try to estimate the model first without signals, then with signals.
+
+```{python}
+# Put the rest of you code and analysis for Part I here 
+```
+
+## Part 2: Analysis of default rates  (Max 10 point)
+
+For a particle in a potential $ V(y) $ with a metastable minimum $ y = a $ and a barrier with a peak located at $ y = b $, the famous Kramers' escape formula gives the following expression for the escape rate $ r $ (see e.g. the book by van Kampen):
+
+$$ 
+r = \frac{\sqrt{ V''(a) \left| V''(b) \right| }}{2 \pi} \exp \left[ - \frac{2}{\sigma^2} (V(b) - V(a) ) \right]
+$$
+
+Here $ V''(a) $ and $ V''(b) $ stand for the second derivatives of the potential $ V(y) $ at the minimum and the maximum, respectively. This formula applies as long as the barrier height $ \Delta E \equiv  (V(b) - V(a) \gg \frac{\sigma^2}{2} $. 
+
+Apply the Kramers formula to the QED potential and parameters that you found in your calibration. What range of values of $ r $ do you obtain? Do these values make sense to you? Can you think how you could use the Kramers relation as a way to regularize your MLE calibration?
+
+```{python}
+# Put the rest of your code and analysis for Part 2 here.
+```
+
+## Part 3: Propose and analyse your own signals  (Max 10 points)
+
+In this part, you will experiment with other signals. Propose a signal and explain why it is interesting to 
+include this signal in the portfolio analysis. Then add your favorite signal or signals to the previous benchmarck signals (or alternatively you can replace them), and repeat the analysis of model calibration. State your conclusions.
+
+```{python}
+# Put the rest of your code and analysis for Part 3 here.
+```
+
+## Part 4 (Optional): Show me something else (Max 10 points).
+
+Here you can develop any additional analysis of the model that you may find interesting (One possible suggestion is 
+presented above, but you should feel free to choose your own topic). Present your case and finding/conclusions.
+
+```{python}
+# Put the rest of your code and analysis for Part 3 here.
+```
+

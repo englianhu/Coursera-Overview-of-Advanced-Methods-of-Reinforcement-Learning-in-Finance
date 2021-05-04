@@ -91,9 +91,11 @@ pkgs <- c('devtools', 'knitr', 'kableExtra', 'tint', 'furrr',
           'feather', 'purrr', 'quantmod', 'tidyquant', 'dtplyr', 
           'timetk', 'plyr', 'dplyr', 'stringr', 'magrittr', 
           'tidyverse', 'memoise', 'htmltools', 'formattable', 
-          'zoo', 'forecast', 'rvest', 'xml2', 
-          'microbenchmark', 'dendextend', 'stringr', 'echarts4r', 
-          'fable', 'fabletools', 'tibbletime', 'tdplyr')
+          ## https://rstudio-pubs-static.s3.amazonaws.com/31702_9c22e3d1a0c44968a4a1f9656f1800ab.html
+          'zoo', 'forecast', 'tibbletime', 'fable', 'fabletools', 
+          'xml2', 'rjson', 'RJSONIO', 'jsonlite', 'tdplyr', 
+          'microbenchmark', 'echarts4r', 'Rdym', 'rvest', 
+          'rmarkdown')
 
 suppressAll(lib(pkgs))
 # load_pkg(pkgs)
@@ -106,15 +108,22 @@ options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
 ## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
 knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
                       message = FALSE, cache.lazy = FALSE)
-
+RdymEnable()
 rm(pkgs)
 ```
 
 ### Read Data
 
 ```{r read-data, warning = FALSE, message = FALSE}
+if(!file.exists('./data/QED_DJI_calibration_Coursera_course_4.Rmd')) {
+  ## https://rstudio-pubs-static.s3.amazonaws.com/31702_9c22e3d1a0c44968a4a1f9656f1800ab.html
+  ## rmarkdown:::convert_ipynb('https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb')
+  rmarkdown:::convert_ipynb('./data/QED_DJI_calibration_Coursera_course_4.ipynb')
+  }
+
 if(!file.exists('./data/dja_cap.csv')) {
-  dowload('https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/view/dja_cap.csv', './data/dja_cap.csv')
+  ## https://rstudio-pubs-static.s3.amazonaws.com/31702_9c22e3d1a0c44968a4a1f9656f1800ab.html
+  utils::download.file('https://rlcquuio.labs.coursera.org/view/dja_cap.csv', './data/dja_cap.csv')
   }
 
 dsmp <- read_html('./data/dja_cap.csv')
