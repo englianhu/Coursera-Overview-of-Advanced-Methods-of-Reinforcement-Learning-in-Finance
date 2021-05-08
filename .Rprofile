@@ -8,12 +8,12 @@
 .First <- function() {
   
   if(!require('BBmisc', quietly = TRUE, warn.conflicts = FALSE)) {
-    install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock', quiet = TRUE)
+    utils::install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock', quiet = TRUE)
   }
   require('BBmisc', quietly = TRUE)
   
   if(!require('devtools', quietly = TRUE, warn.conflicts = FALSE)) {
-    install.packages('devtools', dependencies = TRUE, INSTALL_opts = '--no-lock', quiet = TRUE)       
+    utils::install.packages('devtools', dependencies = TRUE, INSTALL_opts = '--no-lock', quiet = TRUE)       
     devtools::install_github('r-lib/devtools', quiet = TRUE)
   }
   
