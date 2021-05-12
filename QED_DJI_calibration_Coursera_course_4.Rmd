@@ -1,17 +1,40 @@
 ---
-title: An R Markdown document converted from "./data/QED_DJI_calibration_Coursera_course_4.ipynb"
-output: html_document
+title: "<img src='figure/coursera.jpg' width='37'> <img src='figure/nyu.png' width='240'>"
+subtitle: "<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span> (An R Markdown document converted from './data/QED_DJI_calibration_Coursera_course_4.ipynb')"
+author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='figure/quantitative trader 1.jpg' width='12'> <img src='figure/ENG.jpg' width='24'> ®"
+date: "`r lubridate::today('Asia/Tokyo')`"
+output:
+  html_document: 
+    mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    number_sections: yes
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+    code_folding: hide
+    css: CSSBackgrounds.css
 ---
+
+<br>
+<span style='color:green'>**Theme Song**</span>
+<br>
+
+<audio src="music/NY-BJ-Dream.mp3" controls></audio>
+<br>
+
+------
 
 ## Econometric estimation of an IRL-based market portfolio model. Part II: QED
 
 Welcome to your final course project on Advanced Topic RL in Finance. In this project you will: 
 
-- Explore and estimate an IRL-based model of market returns (the "QED" model) that is obtained by a generalization of   a model that you analyzed in the previous course
+- Explore and estimate an IRL-based model of market returns (the `"QED"` model) that is obtained by a generalization of a model that you analyzed in the previous course
 - Respectively, you are expected to re-utilize parts of your previous code from the course project from Course 3: RL (but you can also start from scratch - the template provided here is nearly identical to the one offered to you in course 3)
 - Investige the role of non-linearities in price dynamics
 - Investigate the role and impact of choices of different signals on model estimation and trading strategies
- 
+
+<br>
 
 **Instructions for project structure and grading principles :**
 
@@ -27,18 +50,22 @@ Welcome to your final course project on Advanced Topic RL in Finance. In this pr
 For example, you can repeat your analysis for the S&P portfolio.
 Or maybe you can build a strategy using an optimal market-implied policy estimated from this model, and compare it with PCA and absorption ratio strategies that we built in Course 2. Or anything else.  (Max 10 points).
 
+<br>
+
 **Instructions for formatting your notebook and packages use can use **
 
 - Use one or more cells of the notebook for each section of the project. Each section is marked by a header cell below. Insert your cells between them without changing the sequence. 
 
 - Think of an optimal presentation of your results and conclusions. Think of how hard or easy it will be for your fellow students to follow your logic and presentation. When you are grading others, you can add or subtract point for the quality of presentation.
 
-- You will be using Python 3 in this project. Using TensorFlow is encouraged but is not strictly necessary, you can use optimization algorithms available in scipy or scikit-learn packages. If you use any non-standard packages, you should state all neccessary additional imports (or instructions how to install any additional modules you use in a top cell of your notebook. If you create a new portfolio for parts 3 and 4 in the project, make your code for creating your dataset replicable as well, so that your grader can reproduce your code locally on his/her machine.   
+- You will be using Python 3 in this project. Using **TensorFlow** is encouraged but is not strictly necessary, you can use optimization algorithms available in `scipy` or `scikit-learn` packages. If you use any non-standard packages, you should state all neccessary additional imports (or instructions how to install any additional modules you use in a top cell of your notebook. If you create a new portfolio for parts 3 and 4 in the project, make your code for creating your dataset replicable as well, so that your grader can reproduce your code locally on his/her machine.   
 
 - Try to write a clean code that can be followed by your peer reviewer. When you are the reviewer, you can add or subtract point for the quality of code. 
 
+<br>
 
 **After completing this project you will:**
+
 - Get experience with building and estimation of your second IRL based model of market dynamics.
 - Develop intuition and understanding about the role of non-linearities in dynamics model. 
 - Develop intuition on whether the same model could be calibrated to both equity and credit data.
@@ -50,11 +77,12 @@ Let's get started!
 
 In Week 3 lectures of our course we presented the "QED" model
 $$
-d X_t = \kappa X_t  \left( \frac{\theta}{\kappa} - X_t - \frac{g}{\kappa} X_t^2 \right) dt +  X_t \left( {\bf w} {\bf z}_t \, dt + \sigma d W_t \right)
+d X_t = \kappa X_t  \left( \frac{\theta}{\kappa} - X_t - \frac{g}{\kappa} X_t^2 \right) dt +  \\
+X_t \left( {\bf w} {\bf z}_t \, dt + \sigma d W_t \right)
 $$
 
 In this project, you will explore calibration of this model to market data.
-As in the course project for course 3 you analyzed the same model in the limit $ g = 0 $, you would be able to re-utilize parts of your previous code in this project).
+As in the course project for course 3 you analyzed the same model in the limit $g = 0$, you would be able to re-utilize parts of your previous code in this project).
 
 ```{python}
 import pandas as pd
@@ -67,7 +95,7 @@ from datetime import datetime
 
 ```{python}
 # read the data to a Dataframe
-df_cap = pd.read_csv('dja_cap.csv')
+df_cap = pd.read_csv('./data/dja_cap.csv')
 ```
 
 ```{python}

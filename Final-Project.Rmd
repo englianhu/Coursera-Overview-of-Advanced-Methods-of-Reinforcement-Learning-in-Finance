@@ -23,11 +23,99 @@ output:
 <audio src="music/NY-BJ-Dream.mp3" controls></audio>
 <br>
 
+<br><br>
+
 ------
 
 <br>
 
 # 受講生によるテスト：(Final Project)
+
+## Stylist RMarkdown
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+
+```{css class.source = 'bg-success', class.output = 'bg-primary'}
+/* https://stackoverflow.com/a/66029010/3806250 */
+h1 { color: #002C54; }
+h2 { color: #2F496E; }
+h3 { color: #375E97; }
+
+/* https://bookdown.org/yihui/rmarkdown-cookbook/chunk-styling.html */
+.gradient1 {
+  background: linear-gradient(155deg, #F9BA32 0%, #FFEB94 100%);
+}
+
+.gradient2 {
+  color: #FFD64D;
+  background: linear-gradient(155deg, #002C54 0%, #4CB5F5 100%);
+  /*background-image: linear-gradient(to right,golden,golden, yellow, yellow);*/
+  /*-webkit-background-clip: text;*/
+  /*display: inline-block;*/
+  /*padding: 14px;*/
+  /*-webkit-text-fill-color: transparent;*/
+  /*font-family: 'Stay Out Regular';*/
+}
+
+.shine {
+	background: #FFD64D -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, yellow)) 0 0 no-repeat;
+	-webkit-background-size: 150px;
+	color: $text-color;
+	-webkit-background-clip: text;
+	-webkit-animation-name: shine;
+	-webkit-animation-duration: $duration;
+	-webkit-animation-iteration-count: infinite;
+	text-shadow: 0 0px 0px golden-rod;
+}
+```
+
+```{r global_options, class.source = 'bg-success', class.output = 'bg-primary'}
+## https://stackoverflow.com/a/36846793/3806250
+options(width = 999)
+knitr::opts_chunk$set(class.source = 'gradient1', class.output = 'gradient2', class.error = 'bg-danger')
+```
+
+<br><br>
+
+## Setup
+
+```{r setup, warning = FALSE, message = FALSE}
+if(!suppressPackageStartupMessages(require('BBmisc'))) {
+  install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock')
+}
+suppressPackageStartupMessages(require('BBmisc'))
+# suppressPackageStartupMessages(require('rmsfuns'))
+
+pkgs <- c('devtools', 'knitr', 'kableExtra', 'tidyr', 
+          'readr', 'lubridate', 'data.table', 'reprex', 
+          'timetk', 'plyr', 'dplyr', 'stringr', 'magrittr', 
+          'tdplyr', 'tidyverse', 'formattable', 'reticulate', 
+          'echarts4r', 'paletteer')
+
+suppressAll(lib(pkgs))
+# load_pkg(pkgs)
+
+## Set the timezone but not change the datetime
+Sys.setenv(TZ = 'Asia/Tokyo')
+## options(knitr.table.format = 'html') will set all kableExtra tables to be 'html', otherwise need to set the parameter on every single table.
+options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
+
+## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+RdymEnable()
+rm(pkgs)
+```
+
+<br><br>
 
 # Introduction
 
@@ -48,6 +136,7 @@ This is a project that will be graded based on a peer-to-peer review. The projec
 - **Part 3**: Experiment with other signals and investigate the impact on model calibration obtained with alternative signals. Present your conclusions and observations. (Max 10 points).
 
 - **Part 4**: Show me something else. This part is optional. Come up with your own idea of an interesting analysis. For example, you can repeat your analysis for the S&P portfolio. Or maybe you can build a strategy using an optimal market-implied policy estimated from this model, and compare it with PCA and absorption ratio strategies that we built in Course 2. Or anything else. (Max 10 points).
+
 Files for this project
 
 Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Coursera_course_4.ipynb](https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb) and [dja_cap.csv](https://hub.coursera-notebooks.org/user/instructorqhmgnnughhoz/view/dja_cap.csv)
@@ -75,50 +164,13 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 
 ## Answer
 
-### Load Packages
-
-<span style='color:green'>**Load Packages**</span>
-
-```{r setup, warning = FALSE, message = FALSE}
-if(!suppressPackageStartupMessages(require('BBmisc'))) {
-  install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock')
-}
-suppressPackageStartupMessages(require('BBmisc'))
-# suppressPackageStartupMessages(require('rmsfuns'))
-
-pkgs <- c('devtools', 'knitr', 'kableExtra', 'tint', 'furrr', 
-          'readr', 'lubridate', 'data.table', 'reprex', 'tidyr', 
-          'feather', 'purrr', 'quantmod', 'tidyquant', 'dtplyr', 
-          'timetk', 'plyr', 'dplyr', 'stringr', 'magrittr', 
-          'tidyverse', 'memoise', 'htmltools', 'formattable', 
-          ## https://rstudio-pubs-static.s3.amazonaws.com/31702_9c22e3d1a0c44968a4a1f9656f1800ab.html
-          'zoo', 'forecast', 'tibbletime', 'fable', 'fabletools', 
-          'xml2', 'rjson', 'RJSONIO', 'jsonlite', 'tdplyr', 
-          'microbenchmark', 'echarts4r', 'Rdym', 'rvest', 
-          'rmarkdown')
-
-suppressAll(lib(pkgs))
-# load_pkg(pkgs)
-
-## Set the timezone but not change the datetime
-Sys.setenv(TZ = 'Asia/Tokyo')
-## options(knitr.table.format = 'html') will set all kableExtra tables to be 'html', otherwise need to set the parameter on every single table.
-options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
-
-## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
-knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
-                      message = FALSE, cache.lazy = FALSE)
-RdymEnable()
-rm(pkgs)
-```
-
 ### Read Data
 
 ```{r read-data, warning = FALSE, message = FALSE}
-if(!file.exists('./data/QED_DJI_calibration_Coursera_course_4.Rmd')) {
+if(!file.exists('./QED_DJI_calibration_Coursera_course_4.Rmd')) {
   ## https://rstudio-pubs-static.s3.amazonaws.com/31702_9c22e3d1a0c44968a4a1f9656f1800ab.html
   ## rmarkdown:::convert_ipynb('https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb')
-  rmarkdown:::convert_ipynb('./data/QED_DJI_calibration_Coursera_course_4.ipynb')
+  rmarkdown:::convert_ipynb('./QED_DJI_calibration_Coursera_course_4.ipynb')
   }
 
 if(!file.exists('./data/dja_cap.csv')) {
@@ -132,6 +184,12 @@ if(!file.exists('./data/dja_cap.html')) {
   write_html(dsmp, './data/dja_cap.html')
   }
 ```
+
+[**Jupyter** - QED_DJI_calibration_Coursera_course_4](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance/ungradedLab/FA2rG/final-project-exploration-of-non-linear-market-model-dynamics/lab)
+
+[**Jupyter** - dja_cap.csv](https://rlcquuio.labs.coursera.org/view/dja_cap.csv)
+
+[Econometric estimation of an IRL-based market portfolio model. Part II: QED](https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb)
 
 <br><br>
 
