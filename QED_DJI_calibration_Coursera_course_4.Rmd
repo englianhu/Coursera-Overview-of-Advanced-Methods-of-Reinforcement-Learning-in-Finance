@@ -85,6 +85,7 @@ In this project, you will explore calibration of this model to market data.
 As in the course project for course 3 you analyzed the same model in the limit $g = 0$, you would be able to re-utilize parts of your previous code in this project).
 
 ```{python}
+#pip3 install pandas numpy tensorflow matplotlib datetime
 import pandas as pd
 import numpy as np
 import tensorflow as tf

@@ -31,6 +31,38 @@ output:
 
 # 受講生によるテスト：(Final Project)
 
+## Setup
+
+```{r setup, warning = FALSE, message = FALSE}
+if(!suppressPackageStartupMessages(require('BBmisc'))) {
+  install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock')
+}
+suppressPackageStartupMessages(require('BBmisc'))
+# suppressPackageStartupMessages(require('rmsfuns'))
+
+pkgs <- c('devtools', 'knitr', 'kableExtra', 'tidyr', 'sass', 
+          'readr', 'lubridate', 'data.table', 'reprex', 
+          'timetk', 'plyr', 'dplyr', 'stringr', 'magrittr', 
+          'tdplyr', 'tidyverse', 'formattable', 'reticulate', 
+          'echarts4r', 'paletteer')
+
+suppressAll(lib(pkgs))
+# load_pkg(pkgs)
+
+## Set the timezone but not change the datetime
+Sys.setenv(TZ = 'Asia/Tokyo')
+## options(knitr.table.format = 'html') will set all kableExtra tables to be 'html', otherwise need to set the parameter on every single table.
+options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
+
+## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
+                      message = FALSE, cache.lazy = FALSE)
+RdymEnable()
+rm(pkgs)
+```
+
+<br><br>
+
 ## Stylist RMarkdown
 
 <style>
@@ -43,7 +75,7 @@ pre code {
 }
 </style>
 
-```{css class.source = 'bg-success', class.output = 'bg-primary'}
+```{scss class.source = 'bg-success', class.output = 'bg-primary'}
 /* https://stackoverflow.com/a/66029010/3806250 */
 h1 { color: #002C54; }
 h2 { color: #2F496E; }
@@ -81,38 +113,6 @@ h3 { color: #375E97; }
 ## https://stackoverflow.com/a/36846793/3806250
 options(width = 999)
 knitr::opts_chunk$set(class.source = 'gradient1', class.output = 'gradient2', class.error = 'bg-danger')
-```
-
-<br><br>
-
-## Setup
-
-```{r setup, warning = FALSE, message = FALSE}
-if(!suppressPackageStartupMessages(require('BBmisc'))) {
-  install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock')
-}
-suppressPackageStartupMessages(require('BBmisc'))
-# suppressPackageStartupMessages(require('rmsfuns'))
-
-pkgs <- c('devtools', 'knitr', 'kableExtra', 'tidyr', 
-          'readr', 'lubridate', 'data.table', 'reprex', 
-          'timetk', 'plyr', 'dplyr', 'stringr', 'magrittr', 
-          'tdplyr', 'tidyverse', 'formattable', 'reticulate', 
-          'echarts4r', 'paletteer')
-
-suppressAll(lib(pkgs))
-# load_pkg(pkgs)
-
-## Set the timezone but not change the datetime
-Sys.setenv(TZ = 'Asia/Tokyo')
-## options(knitr.table.format = 'html') will set all kableExtra tables to be 'html', otherwise need to set the parameter on every single table.
-options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
-
-## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
-knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
-                      message = FALSE, cache.lazy = FALSE)
-RdymEnable()
-rm(pkgs)
 ```
 
 <br><br>
@@ -256,6 +256,8 @@ sys
 2) [AhmedLabbaali/Reinforcement-Learning-in-Finance-](https://github.com/AhmedLabbaali/Reinforcement-Learning-in-Finance-)
 3) [AayushMandhyan/ML-RL-for-Finance](https://github.com/AayushMandhyan/ML-RL-for-Finance)
 4) [Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization](https://github.com/Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization)
+- [Animate.css](https://animate.style/)
+- [Animating CSS Gradients, using only CSS](https://medium.com/@dave_lunny/animating-css-gradients-using-only-css-d2fd7671e759)
 
 <br>
 
