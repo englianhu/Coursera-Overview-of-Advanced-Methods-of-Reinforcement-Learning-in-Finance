@@ -358,7 +358,8 @@ knitr::opts_chunk$set(class.source = &#39;hover-animate-background1&#39;, class.
 </div>
 <div id="the-quantum-equlibrium-disequlibrium-qed-irl-based-model-of-stock-returns" class="section level2" number="0.3">
 <h2 number="0.3"><span class="header-section-number">0.3</span> The “Quantum Equlibrium-Disequlibrium” (QED) IRL-based model of stock returns</h2>
-<p>In Week 3 lectures of our course we presented the “QED” model <span class="math display">\[
+<p>In Week 3 lectures of our course we presented the “QED” model</p>
+<p><span class="math display">\[
 d X_t = \kappa X_t  \left( \frac{\theta}{\kappa} - X_t - \frac{g}{\kappa} X_t^2 \right) dt +  \\
 X_t \left( {\bf w} {\bf z}_t \, dt + \sigma d W_t \right)
 \]</span></p>
@@ -415,15 +416,15 @@ fig = plt.figure(figsize=(10,6))
 ax = fig.add_subplot(1,1,1)
 
 ax.plot(df_cap.loc[start_date:end_date, :].index, df_cap.loc[start_date:end_date, &#39;AAPL&#39;], label=&#39;Cap&#39;)</code></pre>
-<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f8316247160&gt;]</code></pre>
+<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f9ee6929130&gt;]</code></pre>
 <pre class="python hover-animate-background1"><code>ax.plot(long_rolling.loc[start_date:end_date, :].index, long_rolling.loc[start_date:end_date, &#39;AAPL&#39;], 
           label = &#39;%d-days SMA&#39; % window_2)</code></pre>
-<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f83152c5d60&gt;]</code></pre>
+<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f9ee59a5d30&gt;]</code></pre>
 <pre class="python hover-animate-background1"><code>ax.plot(short_rolling.loc[start_date:end_date, :].index, short_rolling.loc[start_date:end_date, &#39;AAPL&#39;], 
          label = &#39;%d-days SMA&#39; % window_1)</code></pre>
-<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f83152812b0&gt;]</code></pre>
+<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f9ee5961280&gt;]</code></pre>
 <pre class="python hover-animate-background1"><code>ax.legend(loc=&#39;best&#39;)</code></pre>
-<pre class="hover-animate-background2"><code>## &lt;matplotlib.legend.Legend object at 0x7f83152c5760&gt;</code></pre>
+<pre class="hover-animate-background2"><code>## &lt;matplotlib.legend.Legend object at 0x7f9ee59a5730&gt;</code></pre>
 <pre class="python hover-animate-background1"><code>ax.set_ylabel(&#39;Cap in $&#39;)</code></pre>
 <pre class="hover-animate-background2"><code>## Text(0, 0.5, &#39;Cap in $&#39;)</code></pre>
 <pre class="python hover-animate-background1"><code>plt.show()</code></pre>

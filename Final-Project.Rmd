@@ -188,7 +188,8 @@ dsmp <- fread('./data/dja_cap.csv')
 
 [**Jupyter** - dja_cap.csv](https://rlcquuio.labs.coursera.org/view/dja_cap.csv)
 
-[Econometric estimation of an IRL-based market portfolio model. Part II: QED](https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb)
+- [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
+- [Econometric estimation of an IRL-based market portfolio model. Part II: QED](https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb)
 
 <br><br>
 

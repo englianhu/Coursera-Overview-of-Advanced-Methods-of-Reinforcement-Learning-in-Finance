@@ -135,6 +135,7 @@ Let's get started!
 ## The "Quantum Equlibrium-Disequlibrium" (QED) IRL-based model of stock returns
 
 In Week 3 lectures of our course we presented the "QED" model
+
 $$
 d X_t = \kappa X_t  \left( \frac{\theta}{\kappa} - X_t - \frac{g}{\kappa} X_t^2 \right) dt +  \\
 X_t \left( {\bf w} {\bf z}_t \, dt + \sigma d W_t \right)
