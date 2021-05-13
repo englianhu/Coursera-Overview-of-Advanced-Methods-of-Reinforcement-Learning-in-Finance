@@ -97,9 +97,10 @@ suppressPackageStartupMessages(require('BBmisc'))
 
 pkgs <- c('devtools', 'knitr', 'kableExtra', 'tidyr', 'sass', 
           'readr', 'lubridate', 'data.table', 'reprex', 
-          'timetk', 'plyr', 'dplyr', 'stringr', 'magrittr', 
-          'tdplyr', 'tidyverse', 'formattable', 'reticulate', 
-          'echarts4r', 'paletteer')
+          'plyr', 'dplyr', 'stringr', 'magrittr', 'timetk', 
+          'tidyverse', 'formattable', 'reticulate', 'fable', 
+          'echarts4r', 'paletteer', 'tidyquant', 
+          'PerformanceAnalytics')
 
 suppressAll(lib(pkgs))
 # load_pkg(pkgs)
@@ -144,18 +145,28 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 
 <br><br>
 
+### Question
+
+```{r out.height = '600px', out.width = '400px'}
+htmltools::includeHTML('QED_DJI_calibration_Coursera_course_4.html')
+```
+
+Kindly refer to [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250) for more information.
+
+<br><br>
+
 ### 自分の提出物
 
 プロジェクト名 *
 プロジェクトにわかりやすいタイトルを付けてください
 
-- **Part 1**: Estimate the model using the DJI portfolio of 30 stocks, first without signals, and then using simple signals such as simple moving averages constructed below (Max 10 point).
+- **Part 1**: Estimate the model using the DJI portfolio of 30 stocks, first without signals, and then using simple signals such as simple moving averages constructed below (*Max 10 point*).
 
-- **Part 2**: Explore the implications of calibrated model parameters for default probabilities of stocks in your portfolio. Present your conclusions and observations. (Max 10 point).
+- **Part 2**: Explore the implications of calibrated model parameters for default probabilities of stocks in your portfolio. Present your conclusions and observations. (*Max 10 point*).
 
-- **Part 3**: Experiment with other signals and investigate the impact on model calibration obtained with alternative signals. Present your conclusions and observations. (Max 10 points).
+- **Part 3**: Experiment with other signals and investigate the impact on model calibration obtained with alternative signals. Present your conclusions and observations. (*Max 10 points*).
 
-- **Part 4**: Show me something else. This part is optional. Come up with your own idea of an interesting analysis. For example, you can repeat your analysis for the S&P portfolio. Or maybe you can build a strategy using an optimal market-implied policy estimated from this model, and compare it with PCA and absorption ratio strategies that we built in Course 2. Or anything else. (Max 10 points).
+- **Part 4**: Show me something else. This part is optional. Come up with your own idea of an interesting analysis. For example, you can repeat your analysis for the S&P portfolio. Or maybe you can build a strategy using an optimal market-implied policy estimated from this model, and compare it with PCA and absorption ratio strategies that we built in Course 2. Or anything else. (*Max 10 points*).
 
 <br><br>
 
@@ -190,6 +201,69 @@ dsmp <- fread('./data/dja_cap.csv')
 
 - [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
 - [Econometric estimation of an IRL-based market portfolio model. Part II: QED](https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb)
+
+### Part 1: Model calibration with or without moving average signals (Max 10 points)
+
+To calibrate the model, it is convenient to use the log-prices instead of prices. Diffusion in the log-space 
+$ y = \log x $ is given by the following Langevin equation:
+
+$$
+d y_t = - \frac{ \partial V(y)}{\partial y} dt + \sigma dW_t , \; \; \;  V(y)  \equiv - \left( \theta - \frac{\sigma^2}{2} + {\bf w} {\bf z}_t \right) y  + \kappa e^y + \frac{1}{2} g e^{2y}
+$$
+
+where $ W_t $ is a standard Brownian motion.
+In terms of variables $ y = \log x $, the negative log-likelihood of data is therefore
+
+$$
+LL_M (\Theta) = - \log \prod_{t=0}^{T-1} 
+\frac{1}{ \sqrt{ 2 \pi  \sigma^2}  } 
+\exp \left\{  - \frac{1}{2 \sigma^2} \left(   \frac{ y_{t+ \Delta t} -   y_{t}}{ \Delta t} +  \frac{ \partial V(y)}{\partial y}   
+\right)^2
+\right\} , 
+$$ 
+
+where $ {\bf y}_t  = \log x_t $  now stands for observed values of log-cap. Note that because the model is Markov, the product over $ t = 0, \ldots, T-1 $ does not 
+necessarily mean a product of transitions along the same trajectory. The negative log-likelihood should be minimized to estimate parameters $ 
+\theta $, $ \sigma $, $ \kappa $, $ g $ and  $ {\bf w} $. You can try to estimate the model first without signals, then with signals.
+
+```{python}
+# Put the rest of you code and analysis for Part I here 
+```
+
+### Part 2: Analysis of default rates  (Max 10 point)
+
+For a particle in a potential $ V(y) $ with a metastable minimum $ y = a $ and a barrier with a peak located at $ y = b $, the famous Kramers' escape formula gives the following expression for the escape rate $ r $ (see e.g. the book by van Kampen):
+
+$$ 
+r = \frac{\sqrt{ V''(a) \left| V''(b) \right| }}{2 \pi} \exp \left[ - \frac{2}{\sigma^2} (V(b) - V(a) ) \right]
+$$
+
+Here $ V''(a) $ and $ V''(b) $ stand for the second derivatives of the potential $ V(y) $ at the minimum and the maximum, respectively. This formula applies as long as the barrier height $ \Delta E \equiv  (V(b) - V(a) \gg \frac{\sigma^2}{2} $. 
+
+Apply the Kramers formula to the QED potential and parameters that you found in your calibration. What range of values of $ r $ do you obtain? Do these values make sense to you? Can you think how you could use the Kramers relation as a way to regularize your MLE calibration?
+
+```{python}
+# Put the rest of your code and analysis for Part 2 here.
+```
+
+### Part 3: Propose and analyse your own signals  (Max 10 points)
+
+In this part, you will experiment with other signals. Propose a signal and explain why it is interesting to 
+include this signal in the portfolio analysis. Then add your favorite signal or signals to the previous benchmarck signals (or alternatively you can replace them), and repeat the analysis of model calibration. State your conclusions.
+
+```{python}
+# Put the rest of your code and analysis for Part 3 here.
+```
+
+### Part 4 (Optional): Show me something else (Max 10 points).
+
+Here you can develop any additional analysis of the model that you may find interesting (One possible suggestion is 
+presented above, but you should feel free to choose your own topic). Present your case and finding/conclusions.
+
+```{python}
+# Put the rest of your code and analysis for Part 3 here.
+```
+
 
 <br><br>
 
@@ -261,6 +335,7 @@ sys
 - [CLAS Linux Group](https://clas.uiowa.edu/linux/help/applications/rpackage)
 - [**quadprogpp**: Fast Quadratic Programming for R](https://github.com/fnoorian/quadprogpp)
 - [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
+- [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250)
 
 <br>
 
