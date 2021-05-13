@@ -27,6 +27,61 @@ output:
 
 ------
 
+## SCSS Setup
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+
+```{r class.source = 'bg-success', class.output = 'bg-primary', message = FALSE, warning = FALSE}
+# install.packages("remotes")
+require('BBmisc')
+#remotes::install_github("rstudio/sass")
+lib('sass')
+```
+
+```{scss class.source = 'bg-success', class.output = 'bg-primary'}
+/* https://stackoverflow.com/a/66029010/3806250 */
+h1 { color: #002C54; }
+h2 { color: #2F496E; }
+h3 { color: #375E97; }
+
+/* ----------------------------------------------------------------- */
+/* https://gist.github.com/himynameisdave/c7a7ed14500d29e58149#file-broken-gradient-animation-less */
+.hover-animate-background1 {
+  /* color: #FFD64D; */
+  background: linear-gradient(155deg, #EDAE01 0%, #FFEB94 100%);
+  transition: all 0.45s;
+  &:hover{
+    background: linear-gradient(155deg, #EDAE01 20%, #FFEB94 80%);
+    }
+  }
+
+/* //  For brevity, vendor prefixes have been removed. */
+/* //  This does not work as expected; instead of a smooth transition */
+/* //  what you get is a hard swap from one gradient to the next */
+.hover-animate-background2 {
+  color: #FFD64D;
+  background: linear-gradient(155deg, #002C54 0%, #4CB5F5 100%);
+  transition: all 0.45s;
+  &:hover{
+    background: linear-gradient(155deg, #002C54 20%, #4CB5F5 80%);
+    }
+  }
+```
+
+```{r global_options, class.source = 'bg-success', class.output = 'bg-primary'}
+## https://stackoverflow.com/a/36846793/3806250
+options(width = 999)
+knitr::opts_chunk$set(class.source = 'hover-animate-background1', class.output = 'hover-animate-background2', class.error = 'bg-danger')
+```
+
 <br>
 
 # 受講生によるテスト：(Final Project)
@@ -59,60 +114,6 @@ knitr::opts_chunk$set(cache = TRUE, warning = FALSE,
                       message = FALSE, cache.lazy = FALSE)
 RdymEnable()
 rm(pkgs)
-```
-
-<br><br>
-
-## Stylist RMarkdown
-
-<style>
-pre {
-  overflow-x: auto;
-}
-pre code {
-  word-wrap: normal;
-  white-space: pre;
-}
-</style>
-
-```{scss class.source = 'bg-success', class.output = 'bg-primary'}
-/* https://stackoverflow.com/a/66029010/3806250 */
-h1 { color: #002C54; }
-h2 { color: #2F496E; }
-h3 { color: #375E97; }
-
-/* https://bookdown.org/yihui/rmarkdown-cookbook/chunk-styling.html */
-.gradient1 {
-  background: linear-gradient(155deg, #F9BA32 0%, #FFEB94 100%);
-}
-
-.gradient2 {
-  color: #FFD64D;
-  background: linear-gradient(155deg, #002C54 0%, #4CB5F5 100%);
-  /*background-image: linear-gradient(to right,golden,golden, yellow, yellow);*/
-  /*-webkit-background-clip: text;*/
-  /*display: inline-block;*/
-  /*padding: 14px;*/
-  /*-webkit-text-fill-color: transparent;*/
-  /*font-family: 'Stay Out Regular';*/
-}
-
-.shine {
-	background: #FFD64D -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, yellow)) 0 0 no-repeat;
-	-webkit-background-size: 150px;
-	color: $text-color;
-	-webkit-background-clip: text;
-	-webkit-animation-name: shine;
-	-webkit-animation-duration: $duration;
-	-webkit-animation-iteration-count: infinite;
-	text-shadow: 0 0px 0px golden-rod;
-}
-```
-
-```{r global_options, class.source = 'bg-success', class.output = 'bg-primary'}
-## https://stackoverflow.com/a/36846793/3806250
-options(width = 999)
-knitr::opts_chunk$set(class.source = 'gradient1', class.output = 'gradient2', class.error = 'bg-danger')
 ```
 
 <br><br>
@@ -256,6 +257,9 @@ sys
 4) [Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization](https://github.com/Ahmed0028/Machine-Learning-and-Reinforcement-Learning-in-Finance-Specialization)
 - [Animate.css](https://animate.style/)
 - [Animating CSS Gradients, using only CSS](https://medium.com/@dave_lunny/animating-css-gradients-using-only-css-d2fd7671e759)
+- [CLAS Linux Group](https://clas.uiowa.edu/linux/help/applications/rpackage)
+- [**quadprogpp**: Fast Quadratic Programming for R](https://github.com/fnoorian/quadprogpp)
+- [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
 
 <br>
 

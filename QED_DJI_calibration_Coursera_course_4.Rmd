@@ -25,6 +25,65 @@ output:
 
 ------
 
+## SCSS Setup
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+
+```{r class.source = 'bg-success', class.output = 'bg-primary', message = FALSE, warning = FALSE}
+# install.packages("remotes")
+require('BBmisc')
+#remotes::install_github("rstudio/sass")
+lib('sass')
+```
+
+```{scss class.source = 'bg-success', class.output = 'bg-primary'}
+/* https://stackoverflow.com/a/66029010/3806250 */
+h1 { color: #002C54; }
+h2 { color: #2F496E; }
+h3 { color: #375E97; }
+
+/* ----------------------------------------------------------------- */
+/* https://gist.github.com/himynameisdave/c7a7ed14500d29e58149#file-broken-gradient-animation-less */
+.hover-animate-background1 {
+  /* color: #FFD64D; */
+  background: linear-gradient(155deg, #EDAE01 0%, #FFEB94 100%);
+  transition: all 0.45s;
+  &:hover{
+    background: linear-gradient(155deg, #EDAE01 20%, #FFEB94 80%);
+    }
+  }
+
+/* //  For brevity, vendor prefixes have been removed. */
+/* //  This does not work as expected; instead of a smooth transition */
+/* //  what you get is a hard swap from one gradient to the next */
+.hover-animate-background2 {
+  color: #FFD64D;
+  background: linear-gradient(155deg, #002C54 0%, #4CB5F5 100%);
+  transition: all 0.45s;
+  &:hover{
+    background: linear-gradient(155deg, #002C54 20%, #4CB5F5 80%);
+    }
+  }
+```
+
+```{r global_options, class.source = 'bg-success', class.output = 'bg-primary'}
+## https://stackoverflow.com/a/36846793/3806250
+options(width = 999)
+knitr::opts_chunk$set(class.source = 'hover-animate-background1', class.output = 'hover-animate-background2', class.error = 'bg-danger')
+```
+
+<br><br>
+
+------
+
 ## Econometric estimation of an IRL-based market portfolio model. Part II: QED
 
 Welcome to your final course project on Advanced Topic RL in Finance. In this project you will: 
