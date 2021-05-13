@@ -4,7 +4,7 @@ navbar:
   title: "<img src='figure/coursera.jpg' width='37'> <img src='figure/nyu.png' width='240'>"
   subtitle: "<span style='color:white; background-color:#4E79A7;'>Overview of Advanced Methods of Reinforcement Learning in Finance</span> (Final Project)"
   author: "[®γσ, Lian Hu](https://englianhu.github.io/) <img src='figure/quantitative trader 1.jpg' width='12'> <img src='figure/ENG.jpg' width='24'> ®"
-  date: "`r lubridate::today('Asia/Tokyo')`"
+  date: "2021-05-14"
   left:
     - text: "Questions"
       href: QED_DJI_calibration_Coursera_course_4.html
