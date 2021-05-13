@@ -98,9 +98,9 @@ suppressPackageStartupMessages(require('BBmisc'))
 pkgs <- c('devtools', 'knitr', 'kableExtra', 'tidyr', 'sass', 
           'readr', 'lubridate', 'data.table', 'reprex', 
           'plyr', 'dplyr', 'stringr', 'magrittr', 'timetk', 
-          'tidyverse', 'formattable', 'reticulate', 'fable', 
-          'echarts4r', 'paletteer', 'tidyquant', 
-          'PerformanceAnalytics')
+          'tidyverse', 'formattable', 'reticulate', 
+          'echarts4r', 'paletteer', 'tidyquant', 'feaster', 
+          'fable', 'fabletools', 'PerformanceAnalytics')
 
 suppressAll(lib(pkgs))
 # load_pkg(pkgs)
@@ -147,8 +147,11 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 
 ### Question
 
-```{r out.height = '600px', out.width = '400px'}
-htmltools::includeHTML('QED_DJI_calibration_Coursera_course_4.html')
+```{r, eval = FALSE, out.height = '600px', out.width = '400px', results = 'asis'}
+xfun::file_string('QED_DJI_calibration_Coursera_course_4.html')
+
+# htmltools::includeHTML('QED_DJI_calibration_Coursera_course_4.html')
+htmltools::tags$iframe(title = 'Question Sheet', src = 'QED_DJI_calibration_Coursera_course_4.html', height = 600, width = '100%')
 ```
 
 Kindly refer to [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250) for more information.
@@ -336,6 +339,7 @@ sys
 - [**quadprogpp**: Fast Quadratic Programming for R](https://github.com/fnoorian/quadprogpp)
 - [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
 - [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250)
+- [量化分析(三)預測市場?!](https://medium.com/tej-api-%E9%87%91%E8%9E%8D%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90/%E9%87%8F%E5%8C%96%E5%88%86%E6%9E%90-%E4%B8%89-%E9%A0%90%E6%B8%AC%E5%B8%82%E5%A0%B4-bde88352a011)
 
 <br>
 

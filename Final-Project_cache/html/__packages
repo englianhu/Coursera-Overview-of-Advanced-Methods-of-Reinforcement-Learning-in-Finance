@@ -61,3 +61,6 @@ tibbletime
 gtools
 rvest
 xml2
+sass
+reticulate
+paletteer
