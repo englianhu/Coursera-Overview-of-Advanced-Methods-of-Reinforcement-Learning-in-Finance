@@ -14,6 +14,7 @@ output:
       smooth_scroll: yes
     code_folding: hide
     css: CSSBackgrounds.css
+runtime: shiny
 ---
 
 <br>
@@ -155,6 +156,26 @@ htmltools::tags$iframe(title = 'Question Sheet', src = 'QED_DJI_calibration_Cour
 ```
 
 Kindly refer to [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250) for more information.
+
+```{r}
+shinyApp(
+
+  ui = fluidPage(
+    selectInput("region", "Region:",
+                choices = colnames(WorldPhones)),
+    plotOutput("phonePlot")
+  ),
+
+  server = function(input, output) {
+    output$phonePlot = renderPlot({
+      barplot(WorldPhones[,input$region]*1000,
+              ylab = "Number of Telephones", xlab = "Year")
+    })
+  },
+
+  options = list(height = 500)
+)
+```
 
 <br><br>
 
