@@ -103,7 +103,8 @@ pkgs <- c('devtools', 'knitr', 'kableExtra', 'tidyr', 'sass',
           'plyr', 'dplyr', 'stringr', 'magrittr', 'timetk', 
           'tidyverse', 'formattable', 'reticulate', 'shiny', 
           'echarts4r', 'paletteer', 'tidyquant', 'feaster', 
-          'fable', 'fabletools', 'PerformanceAnalytics')
+          'fable', 'fabletools', 'PerformanceAnalytics', 
+          'Rdym', 'kableExtra', 'reticulate')
 
 suppressAll(lib(pkgs))
 # load_pkg(pkgs)
@@ -116,7 +117,7 @@ options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
 ## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
 knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
                       message = FALSE, cache.lazy = FALSE)
-RdymEnable()
+Rdym::RdymEnable()
 rm(pkgs)
 ```
 
@@ -150,22 +151,23 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 
 ### Question
 
-```{r, eval = FALSE, out.height = '600px', out.width = '400px', results = 'asis'}
+```{r, eval = FALSE, results = 'asis'}
+## eval = FALSE
 # xfun::file_string('QED_DJI_calibration_Coursera_course_4.html')
 
 # htmltools::includeHTML('QED_DJI_calibration_Coursera_course_4.html')
-htmltools::tags$iframe(title = 'Question Sheet', src = 'QED_DJI_calibration_Coursera_course_4.html', height = '600', width = '100%')
+htmltools::tags$iframe(title = 'Question Sheet', src = 'www/QED_DJI_calibration_Coursera_course_4.html', height = 600, width = '100%')
 ```
 
-```{r results = 'asis'}
-# shiny::includeHTML('QED_DJI_calibration_Coursera_course_4.html')
+```{r out.height = '600px', out.width = '80%', results = 'asis'}
+shiny::includeHTML('www/QED_DJI_calibration_Coursera_course_4.html')
 
-shiny::shinyAppDir(
-  system.file(paste0(getwd(), '/QED_DJI_calibration_Coursera_course_4.html')),
-  options = list(
-    width = '100%', height = '700'
-  )
-)
+# shiny::shinyAppDir(
+#   system.file(paste0(getwd(), 'www/QED_DJI_calibration_Coursera_course_4.html')), 
+#   options = list(
+#     width = '100%', height = 700
+#   )
+# )
 ```
 
 Kindly refer to [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250) for more information.
@@ -195,6 +197,8 @@ Kindly refer to [Include HTML files in R Markdown file?](https://stackoverflow.c
 
 ### Read Data
 
+#### R
+
 ```{r read-data, warning = FALSE, message = FALSE}
 if(!file.exists('./QED_DJI_calibration_Coursera_course_4.Rmd')) {
   ## https://rstudio-pubs-static.s3.amazonaws.com/31702_9c22e3d1a0c44968a4a1f9656f1800ab.html
@@ -219,17 +223,52 @@ dsmp <- fread('./data/dja_cap.csv')
 - [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
 - [Econometric estimation of an IRL-based market portfolio model. Part II: QED](https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb)
 
+#### Python
+
+```{python}
+#pip3 install pandas numpy tensorflow matplotlib datetime
+import pandas as pd
+import numpy as np
+import tensorflow as tf
+
+import matplotlib.pyplot as plt
+from datetime import datetime
+import inspect
+```
+
+```{python}
+# read the data to a Dataframe
+df_cap = pd.read_csv('./data/dja_cap.csv')
+```
+
+```{python}
+# add dates
+dates = pd.bdate_range(start = '2010-01-04', end = None, periods = df_cap.shape[0], freq = 'B')
+df_cap['date'] = dates
+
+df_cap.set_index('date', inplace = True)
+
+df_cap
+df_cap.head()
+```
+
+```{r, eval = FALSE, results = 'asis'}
+## eval = FALSE
+## https://community.rstudio.com/t/pretty-printing-python-dataframes-in-rmarkdown-using-reticulate-and-kableextra-table-contest-submission/87981?u=englianhu
+kable_pandas(reticulate::py_eval('df_cap'))
+```
+
 ### Part 1: Model calibration with or without moving average signals (Max 10 points)
 
 To calibrate the model, it is convenient to use the log-prices instead of prices. Diffusion in the log-space 
-$ y = \log x $ is given by the following Langevin equation:
+$y = \log x$ is given by the following Langevin equation:
 
 $$
-d y_t = - \frac{ \partial V(y)}{\partial y} dt + \sigma dW_t , \; \; \;  V(y)  \equiv - \left( \theta - \frac{\sigma^2}{2} + {\bf w} {\bf z}_t \right) y  + \kappa e^y + \frac{1}{2} g e^{2y}
+d y_t = - \frac{ \partial V(y)}{\partial y} dt + \sigma dW_t , \; \; \; \\  V(y)  \equiv - \left( \theta - \frac{\sigma^2}{2} + {\bf w} {\bf z}_t \right) y  + \kappa e^y + \frac{1}{2} g e^{2y}
 $$
 
-where $ W_t $ is a standard Brownian motion.
-In terms of variables $ y = \log x $, the negative log-likelihood of data is therefore
+where $W_t$ is a standard Brownian motion.
+In terms of variables $y = \log x$, the negative log-likelihood of data is therefore
 
 $$
 LL_M (\Theta) = - \log \prod_{t=0}^{T-1} 
@@ -239,12 +278,80 @@ LL_M (\Theta) = - \log \prod_{t=0}^{T-1}
 \right\} , 
 $$ 
 
-where $ {\bf y}_t  = \log x_t $  now stands for observed values of log-cap. Note that because the model is Markov, the product over $ t = 0, \ldots, T-1 $ does not 
-necessarily mean a product of transitions along the same trajectory. The negative log-likelihood should be minimized to estimate parameters $ 
-\theta $, $ \sigma $, $ \kappa $, $ g $ and  $ {\bf w} $. You can try to estimate the model first without signals, then with signals.
+where ${\bf y}_t  = \log x_t$  now stands for observed values of log-cap. Note that because the model is Markov, the product over $t = 0, \ldots, T-1$ does not 
+necessarily mean a product of transitions along the same trajectory. The negative log-likelihood should be minimized to estimate parameters $\theta$, $\sigma$, $\kappa$, $g$ and ${\bf w}$. You can try to estimate the model first without signals, then with signals.
+
+Here I tried to use :
+
+- [Time Series Analysis with LSTM using Python's Keras Library](https://stackabuse.com/time-series-analysis-with-lstm-using-pythons-keras-library/).
+- [Using a Keras Long Short-Term Memory (LSTM) Model to Predict Stock Prices](https://www.kdnuggets.com/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)
 
 ```{python}
 # Put the rest of you code and analysis for Part I here 
+
+def lstm(dataset):
+  ## Feature Scaling
+  from sklearn.preprocessing import MinMaxScaler
+  sc = MinMaxScaler(feature_range = (0, 1))
+  
+  training_set = dataset[:'20101231']
+  training_set_scaled = sc.fit_transform(training_set)
+  
+  ## Creating Data with Timesteps
+  X_train = []
+  y_train = []
+  for i in range(60, len(training_set)):
+      X_train.append(training_set_scaled[i-60:i, 0])
+      y_train.append(training_set_scaled[i, 0])
+      
+  X_train, y_train = np.array(X_train), np.array(y_train)
+  
+  X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+  
+  ## Building the LSTM
+  from keras.models import Sequential
+  from keras.layers import Dense
+  from keras.layers import LSTM
+  from keras.layers import Dropout
+  
+  regressor = Sequential()
+  
+  regressor.add(LSTM(units = 50, return_sequences = True, input_shape = (X_train.shape[1], 1)))
+  regressor.add(Dropout(0.2))
+  
+  regressor.add(LSTM(units = 50, return_sequences = True))
+  regressor.add(Dropout(0.2))
+  
+  regressor.add(LSTM(units = 50, return_sequences = True))
+  regressor.add(Dropout(0.2))
+  
+  regressor.add(LSTM(units = 50))
+  regressor.add(Dropout(0.2))
+  
+  regressor.add(Dense(units = 1))
+  regressor.compile(optimizer = 'adam', loss = 'mae', metrics=['accuracy', 'mae', 'rmse'])
+  
+  regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
+  dataset_test = dataset['20110101':]
+  
+  ## Predicting Future Stock using the Test Set
+  inputs = dataset[len(dataset) - len(dataset_test) - 60:].values
+  inputs = inputs.reshape(-1,1)
+  inputs = sc.transform(inputs)
+  X_test = []
+  for i in range(60, 76):
+    X_test.append(inputs[i-60:i, 0])
+  X_test = np.array(X_test)
+  X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+  predicted_stock_price = regressor.predict(X_test)
+  predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+  
+  return predicted_stock_price
+
+```
+
+```{python}
+
 ```
 
 ### Part 2: Analysis of default rates  (Max 10 point)
@@ -280,6 +387,22 @@ presented above, but you should feel free to choose your own topic). Present you
 ```{python}
 # Put the rest of your code and analysis for Part 3 here.
 ```
+
+<br><br>
+
+# Peer
+
+## Peer 1
+
+
+<br><br>
+
+## Peer 2
+
+
+<br><br>
+
+## Peer 3
 
 
 <br><br>
@@ -354,6 +477,11 @@ sys
 - [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
 - [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250)
 - [量化分析(三)預測市場?!](https://medium.com/tej-api-%E9%87%91%E8%9E%8D%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90/%E9%87%8F%E5%8C%96%E5%88%86%E6%9E%90-%E4%B8%89-%E9%A0%90%E6%B8%AC%E5%B8%82%E5%A0%B4-bde88352a011)
+- [StockPredictionRNN](https://gitlab.com/harshgupta1/StockPredictionRNN)
+- [Python Graph Gallery - All charts](https://www.python-graph-gallery.com/all-charts)
+- [How to Publish a Jupyter Notebook to RStudio Connect](https://docs.rstudio.com/how-to-guides/rsc/publish-jupyter-notebook/)
+- [7.5 Partial Derivatives with Respect to $T$, $p$, and $V$](https://chem.libretexts.org/Bookshelves/Physical_and_Theoretical_Chemistry_Textbook_Maps/DeVoes_Thermodynamics_and_Chemistry/07%3A_Pure_Substances_in_Single_Phases/75_Partial_Derivatives_with_Respect_to_(T)%2C_(p)%2C_and_(V))
+- [Model Calibration and Automated Trading Agent for Euro Futures]()
 
 <br>
 

@@ -239,6 +239,7 @@ necessarily mean a product of transitions along the same trajectory. The negativ
 
 ```{python}
 # Put the rest of you code and analysis for Part I here 
+
 ```
 
 ## Part 2: Analysis of default rates  (Max 10 point)
