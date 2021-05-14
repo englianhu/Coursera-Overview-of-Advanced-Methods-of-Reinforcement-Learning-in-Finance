@@ -14,7 +14,9 @@ output:
       smooth_scroll: yes
     code_folding: hide
     css: CSSBackgrounds.css
-runtime: shiny
+  runtime: shiny
+  resource_files:
+    QED_DJI_calibration_Coursera_course_4.html
 ---
 
 <br>
@@ -99,7 +101,7 @@ suppressPackageStartupMessages(require('BBmisc'))
 pkgs <- c('devtools', 'knitr', 'kableExtra', 'tidyr', 'sass', 
           'readr', 'lubridate', 'data.table', 'reprex', 
           'plyr', 'dplyr', 'stringr', 'magrittr', 'timetk', 
-          'tidyverse', 'formattable', 'reticulate', 
+          'tidyverse', 'formattable', 'reticulate', 'shiny', 
           'echarts4r', 'paletteer', 'tidyquant', 'feaster', 
           'fable', 'fabletools', 'PerformanceAnalytics')
 
@@ -149,33 +151,24 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 ### Question
 
 ```{r, eval = FALSE, out.height = '600px', out.width = '400px', results = 'asis'}
-xfun::file_string('QED_DJI_calibration_Coursera_course_4.html')
+# xfun::file_string('QED_DJI_calibration_Coursera_course_4.html')
 
 # htmltools::includeHTML('QED_DJI_calibration_Coursera_course_4.html')
-htmltools::tags$iframe(title = 'Question Sheet', src = 'QED_DJI_calibration_Coursera_course_4.html', height = 600, width = '100%')
+htmltools::tags$iframe(title = 'Question Sheet', src = 'QED_DJI_calibration_Coursera_course_4.html', height = '600', width = '100%')
+```
+
+```{r results = 'asis'}
+# shiny::includeHTML('QED_DJI_calibration_Coursera_course_4.html')
+
+shiny::shinyAppDir(
+  system.file(paste0(getwd(), '/QED_DJI_calibration_Coursera_course_4.html')),
+  options = list(
+    width = '100%', height = '700'
+  )
+)
 ```
 
 Kindly refer to [Include HTML files in R Markdown file?](https://stackoverflow.com/a/36525111/3806250) for more information.
-
-```{r}
-shinyApp(
-
-  ui = fluidPage(
-    selectInput("region", "Region:",
-                choices = colnames(WorldPhones)),
-    plotOutput("phonePlot")
-  ),
-
-  server = function(input, output) {
-    output$phonePlot = renderPlot({
-      barplot(WorldPhones[,input$region]*1000,
-              ylab = "Number of Telephones", xlab = "Year")
-    })
-  },
-
-  options = list(height = 500)
-)
-```
 
 <br><br>
 

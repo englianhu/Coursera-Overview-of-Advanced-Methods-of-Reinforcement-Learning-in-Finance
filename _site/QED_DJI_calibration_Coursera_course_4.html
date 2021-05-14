@@ -512,19 +512,19 @@ fig = plt.figure(figsize=(10,6))
 ax = fig.add_subplot(1,1,1)
 
 ax.plot(df_cap.loc[start_date:end_date, :].index, df_cap.loc[start_date:end_date, &#39;AAPL&#39;], label=&#39;Cap&#39;)</code></pre>
-<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f0c3c9495b0&gt;]</code></pre>
+<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7fde71bd4190&gt;]</code></pre>
 <pre class="python hover-animate-background1"><code>ax.plot(long_rolling.loc[start_date:end_date, :].index, long_rolling.loc[start_date:end_date, &#39;AAPL&#39;], 
           label = &#39;%d-days SMA&#39; % window_2)</code></pre>
-<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f0c3c90b4c0&gt;]</code></pre>
+<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7fde70c4db80&gt;]</code></pre>
 <pre class="python hover-animate-background1"><code>ax.plot(short_rolling.loc[start_date:end_date, :].index, short_rolling.loc[start_date:end_date, &#39;AAPL&#39;], 
          label = &#39;%d-days SMA&#39; % window_1)</code></pre>
-<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7f0c3c90ba00&gt;]</code></pre>
+<pre class="hover-animate-background2"><code>## [&lt;matplotlib.lines.Line2D object at 0x7fde70c03040&gt;]</code></pre>
 <pre class="python hover-animate-background1"><code>ax.legend(loc=&#39;best&#39;)</code></pre>
-<pre class="hover-animate-background2"><code>## &lt;matplotlib.legend.Legend object at 0x7f0c3c90b310&gt;</code></pre>
+<pre class="hover-animate-background2"><code>## &lt;matplotlib.legend.Legend object at 0x7fde70c4d4c0&gt;</code></pre>
 <pre class="python hover-animate-background1"><code>ax.set_ylabel(&#39;Cap in $&#39;)</code></pre>
 <pre class="hover-animate-background2"><code>## Text(0, 0.5, &#39;Cap in $&#39;)</code></pre>
 <pre class="python hover-animate-background1"><code>plt.show()</code></pre>
-<p><img src="QED_DJI_calibration_Coursera_course_4_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
+<p><img src="QED_DJI_calibration_Coursera_course_4_files/figure-html/unnamed-chunk-3-1.png" width="960" /></p>
 </div>
 </div>
 <div id="part-1-model-calibration-with-or-without-moving-average-signals-max-10-points" class="section level2" number="0.5">
