@@ -14,9 +14,6 @@ output:
       smooth_scroll: yes
     code_folding: hide
     css: CSSBackgrounds.css
-  runtime: shiny
-  resource_files:
-    QED_DJI_calibration_Coursera_course_4.html
 ---
 
 <br>
@@ -217,7 +214,8 @@ dsmp <- fread('./data/dja_cap.csv')
 
 ## https://stackoverflow.com/a/45891929/3806250
 library(reticulate)
-py_pth <- '/usr/bin/python3'
+#py_pth <- '/usr/bin/python3'
+py_pth <- ('~/anaconda3/bin/python')
 use_python(py_pth)
 ```
 
@@ -260,7 +258,7 @@ df_cap.head()
 ```{r, eval = FALSE, results = 'asis'}
 ## eval = FALSE
 ## https://community.rstudio.com/t/pretty-printing-python-dataframes-in-rmarkdown-using-reticulate-and-kableextra-table-contest-submission/87981?u=englianhu
-kable_pandas(reticulate::py_eval('df_cap'))
+kableExtra::kable_pandas(reticulate::py_eval('df_cap'))
 ```
 
 ### Part 1: Model calibration with or without moving average signals (Max 10 points)
