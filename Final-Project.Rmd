@@ -214,6 +214,11 @@ if(!file.exists('./data/dja_cap.csv')) {
   }
 
 dsmp <- fread('./data/dja_cap.csv')
+
+## https://stackoverflow.com/a/45891929/3806250
+library(reticulate)
+py_pth <- '/usr/bin/python3'
+use_python(py_pth)
 ```
 
 [**Jupyter** - QED_DJI_calibration_Coursera_course_4](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance/ungradedLab/FA2rG/final-project-exploration-of-non-linear-market-model-dynamics/lab)
