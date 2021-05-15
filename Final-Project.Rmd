@@ -115,8 +115,8 @@ Sys.setenv(TZ = 'Asia/Tokyo')
 options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
 
 ## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
-knitr::opts_chunk$set(cache = TRUE, warning = FALSE, 
-                      message = FALSE, cache.lazy = FALSE)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)#, 
+                      #cache = TRUE, cache.lazy = FALSE)
 Rdym::RdymEnable()
 rm(pkgs)
 ```
