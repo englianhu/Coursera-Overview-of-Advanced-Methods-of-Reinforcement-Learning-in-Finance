@@ -303,7 +303,7 @@ def lstm(dataset):
   for i in range(60, len(training_set)):
       X_train.append(training_set_scaled[i-60:i, 0])
       y_train.append(training_set_scaled[i, 0])
-      
+  
   X_train, y_train = np.array(X_train), np.array(y_train)
   
   X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
@@ -331,7 +331,7 @@ def lstm(dataset):
   regressor.add(Dense(units = 1))
   regressor.compile(optimizer = 'adam', loss = 'mae', metrics=['accuracy', 'mae', 'rmse'])
   
-  regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
+  model = regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
   dataset_test = dataset['20110101':]
   
   ## Predicting Future Stock using the Test Set
@@ -351,7 +351,15 @@ def lstm(dataset):
 ```
 
 ```{python}
+pred = lstm(df_cap['AAPL'])
 
+plt.plot(df_cap['AAPL'], color = 'black', label = 'TATA Stock Price')
+plt.plot(pred, color = 'green', label = 'Predicted TATA Stock Price')
+plt.title('TATA Stock Price Prediction')
+plt.xlabel('Time')
+plt.ylabel('TATA Stock Price')
+plt.legend()
+plt.show()
 ```
 
 ### Part 2: Analysis of default rates  (Max 10 point)
