@@ -215,7 +215,8 @@ dsmp <- fread('./data/dja_cap.csv')
 ## https://stackoverflow.com/a/45891929/3806250
 library(reticulate)
 #py_pth <- '/usr/bin/python3'
-py_pth <- ('~/anaconda3/bin/python')
+#py_pth <- ('~/anaconda3/bin/python')
+py_pth <- ('~/anaconda3/bin/python3')
 use_python(py_pth)
 ```
 
@@ -248,9 +249,7 @@ df_cap = pd.read_csv('./data/dja_cap.csv')
 # add dates
 dates = pd.bdate_range(start = '2010-01-04', end = None, periods = df_cap.shape[0], freq = 'B')
 df_cap['date'] = dates
-
 df_cap.set_index('date', inplace = True)
-
 df_cap
 df_cap.head()
 ```
