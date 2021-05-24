@@ -27,6 +27,8 @@ output:
 
 ------
 
+# Setting
+
 ## SCSS Setup
 
 <style>
@@ -37,24 +39,29 @@ pre code {
   word-wrap: normal;
   white-space: pre;
 }
+.table-hover > tbody > tr:hover { 
+  background-color: #8D918D;
+}
 </style>
 
-```{r class.source = 'bg-success', class.output = 'bg-primary', message = FALSE, warning = FALSE}
+```{r class.source='bg-success', class.output='bg-primary', message = FALSE, warning = FALSE}
 # install.packages("remotes")
-require('BBmisc')
+library('BBmisc', 'rmsfuns')
 #remotes::install_github("rstudio/sass")
 lib('sass')
 ```
 
-```{scss class.source = 'bg-success', class.output = 'bg-primary'}
+```{scss class.source='bg-success', class.output='bg-primary'}
 /* https://stackoverflow.com/a/66029010/3806250 */
 h1 { color: #002C54; }
 h2 { color: #2F496E; }
 h3 { color: #375E97; }
+h4 { color: #556DAC; }
+h5 { color: #92AAC7; }
 
 /* ----------------------------------------------------------------- */
 /* https://gist.github.com/himynameisdave/c7a7ed14500d29e58149#file-broken-gradient-animation-less */
-.hover-animate-background1 {
+.hover01 {
   /* color: #FFD64D; */
   background: linear-gradient(155deg, #EDAE01 0%, #FFEB94 100%);
   transition: all 0.45s;
@@ -63,10 +70,7 @@ h3 { color: #375E97; }
     }
   }
 
-/* //  For brevity, vendor prefixes have been removed. */
-/* //  This does not work as expected; instead of a smooth transition */
-/* //  what you get is a hard swap from one gradient to the next */
-.hover-animate-background2 {
+.hover02 {
   color: #FFD64D;
   background: linear-gradient(155deg, #002C54 0%, #4CB5F5 100%);
   transition: all 0.45s;
@@ -74,21 +78,28 @@ h3 { color: #375E97; }
     background: linear-gradient(155deg, #002C54 20%, #4CB5F5 80%);
     }
   }
+
+.hover03 {
+  color: #FFD64D;
+  background: linear-gradient(155deg, #A10115 0%, #FF3C5C 100%);
+  transition: all 0.45s;
+  &:hover{
+    background: linear-gradient(155deg, #A10115 20%, #FF3C5C 80%);
+    }
+  }
 ```
 
-```{r global_options, class.source = 'bg-success', class.output = 'bg-primary'}
+```{r global_options, class.source='hover01', class.output='hover02'}
 ## https://stackoverflow.com/a/36846793/3806250
 options(width = 999)
-knitr::opts_chunk$set(class.source = 'hover-animate-background1', class.output = 'hover-animate-background2', class.error = 'bg-danger')
+knitr::opts_chunk$set(class.source = 'hover01', class.output = 'hover02', class.error = 'hover03')
 ```
 
-<br>
-
-# 受講生によるテスト：(Final Project)
+<br><br>
 
 ## Setup
 
-```{r setup, warning = FALSE, message = FALSE}
+```{r warning=FALSE, message=FALSE}
 if(!suppressPackageStartupMessages(require('BBmisc'))) {
   install.packages('BBmisc', dependencies = TRUE, INSTALL_opts = '--no-lock')
 }
@@ -114,13 +125,15 @@ options(warn = -1, knitr.table.format = 'html')#, digits.secs = 6)
 ## https://stackoverflow.com/questions/39417003/long-vectors-not-supported-yet-abnor-in-rmd-but-not-in-r-script
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)#, 
                       #cache = TRUE, cache.lazy = FALSE)
-Rdym::RdymEnable()
+
 rm(pkgs)
 ```
 
 <br><br>
 
-# Introduction
+# 受講生によるテスト：(Final Project)
+
+## Introduction
 
 合計点数 <span style='color:#3C5C; background-color:#011A27;'>60点</span>
 
@@ -146,7 +159,7 @@ Files for this project are uploaded in the Notebook: [QED_DJI_calibration_Course
 
 <br><br>
 
-### Question
+## Question
 
 ```{r, eval = FALSE, results = 'asis'}
 ## eval = FALSE
@@ -210,7 +223,8 @@ if(!file.exists('./data/dja_cap.csv')) {
   utils::download.file('https://github.com/chandc/Inverse_Reinforcement_Learning_for_Stocks/blob/master/dja_cap.csv')
   }
 
-dsmp <- fread('./data/dja_cap.csv')
+#dsmp <- fread('./data/dja_cap.csv')
+dsmp <- read_csv('./data/dja_cap.csv')
 
 ## https://stackoverflow.com/a/45891929/3806250
 library(reticulate)
@@ -218,6 +232,12 @@ library(reticulate)
 #py_pth <- ('~/anaconda3/bin/python')
 py_pth <- ('~/anaconda3/bin/python3')
 use_python(py_pth)
+
+## https://github.com/rstudio/rstudio/issues/8278
+# reticulate::use_condaenv('porepy')
+# reticulate::use_condaenv('python_book')
+#reticulate::use_condaenv('man_ccia')
+#py_config()
 ```
 
 [**Jupyter** - QED_DJI_calibration_Coursera_course_4](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance/ungradedLab/FA2rG/final-project-exploration-of-non-linear-market-model-dynamics/lab)
@@ -226,6 +246,14 @@ use_python(py_pth)
 
 - [Econometric estimation of an IRL-based market portfolio model](https://bailiping.github.io/2019-08-04-IRL/)
 - [Econometric estimation of an IRL-based market portfolio model. Part II: QED](https://rlcquuio.labs.coursera.org/notebooks/QED_DJI_calibration_Coursera_course_4.ipynb)
+
+``` {bash, results ='markdown', collapse=FALSE, message=FALSE, warning=FALSE}
+echo $PATH
+echo 'working from the terminal'
+
+```
+
+Source : [`libtinfo.so.6: no version information available (required by bash)#8278`](https://github.com/rstudio/rstudio/issues/8278)
 
 #### Python
 
