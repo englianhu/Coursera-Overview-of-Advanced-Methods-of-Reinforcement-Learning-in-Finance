@@ -236,8 +236,8 @@ use_python(py_pth)
 ## https://github.com/rstudio/rstudio/issues/8278
 # reticulate::use_condaenv('porepy')
 # reticulate::use_condaenv('python_book')
-#reticulate::use_condaenv('man_ccia')
-#py_config()
+reticulate::use_condaenv('tf')
+py_config()
 ```
 
 [**Jupyter** - QED_DJI_calibration_Coursera_course_4](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance/ungradedLab/FA2rG/final-project-exploration-of-non-linear-market-model-dynamics/lab)
