@@ -2,6 +2,15 @@
 
 ---
 
+# [Machine Learning and Reinforcement Learning in Finance 専門講座](https://www.coursera.org/specializations/machine-learning-reinforcement-finance#courses)
+
+[Machine Learning and Reinforcement Learning in Finance 専門講座](https://www.coursera.org/specializations/machine-learning-reinforcement-finance#courses)
+
+- [Guided Tour of Machine Learning in Finance](https://www.coursera.org/learn/guided-tour-machine-learning-finance?specialization=machine-learning-reinforcement-finance)
+- [Fundamentals of Machine Learning in Finance](https://www.coursera.org/learn/fundamentals-machine-learning-in-finance?specialization=machine-learning-reinforcement-finance)
+- [Reinforcement Learning in Finance](https://www.coursera.org/learn/reinforcement-learning-in-finance?specialization=machine-learning-reinforcement-finance)
+- [Overview of Advanced Methods of Reinforcement Learning in Finance](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance?specialization=machine-learning-reinforcement-finance)
+
 # Coursera : Overview of Advanced Methods of Reinforcement Learning in Finance
 
 [Overview of Advanced Methods of Reinforcement Learning in Finance](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance?) NYU タンドン・スクール・オブ・エンジニアリング（New York University Tandon School of Engineering）
