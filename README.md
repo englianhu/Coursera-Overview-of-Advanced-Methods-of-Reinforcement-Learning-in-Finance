@@ -110,9 +110,33 @@
       
     4.2) Week 4 Assessment
 
-      4.2.1) ラボ: [Final Project: Exploration of non-linear market model dynamics. Duration: 1時間]()
+      4.2.1) ラボ: Final Project: Exploration of non-linear market model dynamics. Duration: 1時間
       
-      4.2.2) 受講生によるテスト: [Final Project. Duration: 1時間]()
+      4.2.2) 受講生によるテスト: [Final Project. Duration: 1時間](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/QED_DJI_calibration_Coursera_course_4_Assignment.ipynb)
       
       4.2.3) 他の受講生の課題を確認: Final Project
-      
+
+---
+
+Other Peers' assignment might refer to :
+
+- [Peer 1](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer1.ipynb)
+- [Peer 2](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer2.ipynb)
+- [Peer 3](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer3.ipynb)
+- [Peer 4](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer4.ipynb)
+- [Peer 5](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer5.ipynb)
+- [Peer 6](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer6.ipynb)
+- [Peer 7](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer7.ipynb)
+
+- [Rmarkdown version (draft, not yet complete)](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/QED_DJI_calibration_Coursera_course_4.Rmd)
+- [Financial Aids (Rmarkdown)](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Final-Project.Rmd)
+
+**Certificate:**
+
+![Coursera - Overview of Advanced Methods of Reinforcement
+Learning in Finance](figure/Coursera - Overview of Advanced Methods of Reinforcement
+Learning in Finance.png)
+
+- [Overview of Advanced Methods of Reinforcement Learning in Finance](https://www.coursera.org/account/accomplishments/certificate/QA3NPYCL67RW)
+- [New York University](https://www.linkedin.com/school/new-york-university)
+- [Coursera Course Certificates](https://www.linkedin.com/company/coursera-verified)
