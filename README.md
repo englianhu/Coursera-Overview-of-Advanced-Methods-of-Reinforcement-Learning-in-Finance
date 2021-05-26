@@ -138,7 +138,7 @@ Other Peers' assignment might refer to :
 - [Peer 7](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Peer7.ipynb)
 
 - [Rmarkdown version (draft, not yet complete)](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/QED_DJI_calibration_Coursera_course_4.Rmd)
-- [Financial Aids (Rmarkdown)](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Final-Project.Rmd)
+- [Financial Aids (Rmarkdown)](https://github.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/blob/main/Financial%20Aids.md)
 
 **Coursera Verified Certificate:**
 
