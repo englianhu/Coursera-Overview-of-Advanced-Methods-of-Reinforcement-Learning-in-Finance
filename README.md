@@ -148,3 +148,7 @@ Learning in Finance](https://raw.githubusercontent.com/englianhu/Coursera-Overvi
 - [Overview of Advanced Methods of Reinforcement Learning in Finance](https://www.coursera.org/account/accomplishments/certificate/QA3NPYCL67RW)
 - [New York University](https://www.linkedin.com/school/new-york-university)
 - [Coursera Course Certificates](https://www.linkedin.com/company/coursera-verified)
+
+---
+
+<span style='color:RoyalBlue'>**<img src='figure/nyu.png' width='24'> [New York University](https://www.nyu.edu) copyright®** </span>
