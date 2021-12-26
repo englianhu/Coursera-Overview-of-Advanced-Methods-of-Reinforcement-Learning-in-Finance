@@ -1,6 +1,6 @@
 <img src='figure/coursera.jpg' width='74'> <img src='figure/nyu.png' width='240'>
 
-# [Machine Learning and Reinforcement Learning in Finance 専門講座](https://www.coursera.org/specializations/machine-learning-reinforcement-finance#courses)
+# Machine Learning and Reinforcement Learning in Finance 専門講座
 
 [Machine Learning and Reinforcement Learning in Finance 専門講座](https://www.coursera.org/specializations/machine-learning-reinforcement-finance#courses)
 
@@ -11,7 +11,7 @@
 
 ## Coursera : Overview of Advanced Methods of Reinforcement Learning in Finance
 
-[Overview of Advanced Methods of Reinforcement Learning in Finance](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance?) NYU タンドン・スクール・オブ・エンジニアリング（New York University Tandon School of Engineering）
+[Overview of Advanced Methods of Reinforcement Learning in Finance](https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance?) by *NYU タンドン・スクール・オブ・エンジニアリング（New York University Tandon School of Engineering）*
 
 1) Week 1 : Black-Scholes-Merton model, Physics and Reinforcement Learning
     
@@ -103,6 +103,7 @@ Other Peers' assignment might refer to :
 ## Coursera Verified Certificate
 
 ![](https://raw.githubusercontent.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/main/figure/Coursera%20-%20Overview%20of%20Advanced%20Methods%20of%20Reinforcement%0ALearning%20in%20Finance.png)
+
 [Coursera - Overview of Advanced Methods of Reinforcement
 Learning in Finance.pdf](https://raw.githubusercontent.com/englianhu/Coursera-Overview-of-Advanced-Methods-of-Reinforcement-Learning-in-Finance/de950eb01765fdd44e2269eb24e6a27c7b99bfba/Coursera%20-%20Overview%20of%20Advanced%20Methods%20of%20Reinforcement%0ALearning%20in%20Finance.pdf)
 
